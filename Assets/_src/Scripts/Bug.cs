@@ -17,11 +17,14 @@ namespace _src.Scripts
 
 		private Rigidbody _rb;
 
+		private Animator _animator;
+
 
 		private void Start()
 		{
 			_collider = GetComponent<Collider>();
 			_rb = GetComponent<Rigidbody>();
+			_animator = GetComponentInChildren<Animator>();
 		}
 
 
@@ -29,6 +32,7 @@ namespace _src.Scripts
 		{
 			_collider.enabled = false;
 			Destroy(_rb);
+			_animator.enabled = false;
 		}
 	}
 }

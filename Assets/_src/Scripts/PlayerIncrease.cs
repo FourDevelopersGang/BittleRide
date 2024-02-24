@@ -124,9 +124,9 @@ namespace _src.Scripts
 
             // Ориентируем объект и перемещаем его к заданной точке
             bug.transform.LookAt(transform.position);
-            bug.transform.Rotate(90f, 0f, 0f);
+            bug.transform.Rotate(0, 0f, 0f);
 
-            bug.transform.DOLocalMove(Random.onUnitSphere /2, 1);
+            bug.transform.DOLocalMove(Random.onUnitSphere / 2.1f, 1);
         }
 
 
