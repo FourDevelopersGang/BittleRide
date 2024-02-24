@@ -1,9 +1,12 @@
 using System;
 using Cinemachine;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
+
 
 namespace _src.Scripts
 {
@@ -40,7 +43,7 @@ namespace _src.Scripts
                 if (IsBugLowerThenPlayer(bug))
                 {
                     IncreaseSize();
-                    Destroy(other.gameObject);
+                    InsertBug(bug).Forget();
                 }
                 else
                 {
@@ -49,6 +52,25 @@ namespace _src.Scripts
                 }
             }
         }
+
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Bug") && other.transform.TryGetComponent(out Bug bug))
+            {
+                if (IsBugLowerThenPlayer(bug))
+                {
+                    IncreaseSize();
+                    InsertBug(bug).Forget();
+                }
+                else
+                {
+                    DecreaseSize();
+                    Destroy(other.gameObject);
+                }
+            }
+        }
+
 
         private void IncreaseSize()
         {
@@ -84,6 +106,31 @@ namespace _src.Scripts
                 Vector3 baseOffset = new Vector3(transposer.m_FollowOffset.x, transposer.m_FollowOffset.y +_increaseSizeValue, transposer.m_FollowOffset.z - _increaseSizeValue);
                 transposer.m_FollowOffset = baseOffset;
             }
+        }
+
+
+        private async UniTask InsertBug(Bug bug)
+        {
+            bug.Deactivate();
+            var pointToPlace = Random.onUnitSphere * _physicalSize;
+
+            var newPoint = Instantiate(new GameObject("point"),
+                pointToPlace,
+                Quaternion.identity
+            );
+
+            while (Vector3.Distance(bug.transform.position, newPoint.transform.position) > 0.01f)
+            {
+                bug.transform.DOMove(newPoint.transform.position,
+                    0
+                );
+
+                await UniTask.Yield();
+            }
+            Destroy(newPoint.gameObject);
+            bug.transform.parent = transform;
+            bug.transform.LookAt(transform);
+            bug.transform.Rotate(90f, 0f, 0f);
         }
 
 
