@@ -35,7 +35,17 @@ namespace _src.Scripts
         public UnityEvent OnIncreaseSize = new();
         
         public UnityEvent OnDecreaseSize = new();
-        
+
+
+        private Rigidbody _rb;
+
+
+        private void Start()
+        {
+            _rb = GetComponent<Rigidbody>();
+        }
+
+
         private void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag("Bug") && other.transform.TryGetComponent(out Bug bug))
@@ -76,9 +86,11 @@ namespace _src.Scripts
         {
             if (_physicalSize + _increaseSizeValue <= _maxSize) // Увеличиваем размер, если не превышен максимум
             {
+                _rb.mass += 3;
                 OnIncreaseSize.Invoke();
                 _size += 1; // Увеличиваем "уровень" игрока
                 _physicalSize += _increaseSizeValue; // Точное увеличение физического размера
+                
                 UpdateScaleAndCameraOffset();
             }
         }
