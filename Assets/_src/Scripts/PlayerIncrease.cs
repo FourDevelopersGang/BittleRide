@@ -1,5 +1,6 @@
 using System;
 using Cinemachine;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -73,8 +74,10 @@ namespace _src.Scripts
 
         private void UpdateScaleAndCameraOffset()
         {
-            transform.localScale = Vector3.one * _physicalSize; // Применяем физический размер
-    
+            transform.DOScale(Vector3.one * _physicalSize,
+                1f
+            );
+
             var transposer = _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
             if (transposer != null)
             {
