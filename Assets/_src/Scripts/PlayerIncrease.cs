@@ -43,7 +43,7 @@ namespace _src.Scripts
                 if (IsBugLowerThenPlayer(bug))
                 {
                     IncreaseSize();
-                    InsertBug(bug).Forget();
+                    InsertBug(bug);
                 }
                 else
                 {
@@ -61,7 +61,7 @@ namespace _src.Scripts
                 if (IsBugLowerThenPlayer(bug))
                 {
                     IncreaseSize();
-                    InsertBug(bug).Forget();
+                    InsertBug(bug);
                 }
                 else
                 {
@@ -109,29 +109,27 @@ namespace _src.Scripts
         }
 
 
-        private async UniTask InsertBug(Bug bug)
+        private void InsertBug(Bug bug)
         {
             bug.Deactivate();
-            var pointToPlace = Random.onUnitSphere * _physicalSize;
 
-            var newPoint = Instantiate(new GameObject("point"),
-                pointToPlace,
-                Quaternion.identity
-            );
+            // Определяем точку для размещения на сфере, учитывая текущий масштаб игрока
 
-            while (Vector3.Distance(bug.transform.position, newPoint.transform.position) > 0.01f)
-            {
-                bug.transform.DOMove(newPoint.transform.position,
-                    0
-                );
-
-                await UniTask.Yield();
-            }
-            Destroy(newPoint.gameObject);
+            // Делаем объект дочерним и устанавливаем начальную позицию
             bug.transform.parent = transform;
-            bug.transform.LookAt(transform);
+            bug.transform.localPosition = Vector3.zero;
+
+            // Установим фиксированный масштаб для жука, предположим, что исходный масштаб жука подходит
+            bug.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Можно настроить этот масштаб
+
+            // Ориентируем объект и перемещаем его к заданной точке
+            bug.transform.LookAt(transform.position);
             bug.transform.Rotate(90f, 0f, 0f);
+
+            bug.transform.DOLocalMove(Random.onUnitSphere /2, 1);
         }
+
+
 
 
         private bool IsBugLowerThenPlayer(Bug bug) => bug.Size < _size; // Сравнение уровня игрока и жука
