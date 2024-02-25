@@ -14,6 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Database:
     Items:
+    - Category: InGame
+      Name: Continue
+    - Category: InGame
+      Name: NextLevel
+    - Category: InGame
+      Name: Pause
+    - Category: InGame
+      Name: Restart
+    - Category: InGame
+      Name: ReturnToMainMenu
     - Category: Levels
       Name: 1
     - Category: Levels

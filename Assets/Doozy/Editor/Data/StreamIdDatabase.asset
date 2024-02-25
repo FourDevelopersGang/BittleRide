@@ -13,4 +13,10 @@ MonoBehaviour:
   m_Name: StreamIdDatabase
   m_EditorClassIdentifier: 
   Database:
-    Items: []
+    Items:
+    - Category: InGameSignals
+      Name: Loose
+    - Category: InGameSignals
+      Name: Win
+    - Category: None
+      Name: None
