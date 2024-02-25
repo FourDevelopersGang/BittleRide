@@ -40,6 +40,10 @@ namespace _src.Scripts
 
 
 		[SerializeField]
+		private float _centerOfSphereDelta = 2.5f;
+
+
+		[SerializeField]
 		private float _increaseSizeValue = 0.01f; // Значение изменения физического размера
 
 
@@ -176,7 +180,7 @@ namespace _src.Scripts
 				0f
 			);
 
-			bug.transform.localPosition = Random.onUnitSphere / 2.1f;
+			bug.transform.localPosition = Random.onUnitSphere / _centerOfSphereDelta;
 		}
 
 
@@ -187,6 +191,7 @@ namespace _src.Scripts
 
 			foreach (var bug in _smashedBugs)
 			{
+				bug.transform.localScale = Vector3.zero;
 				// Применяем обратный масштаб к каждому жуку, чтобы их размер оставался постоянным в мировом пространстве
 				bug.transform.localScale = inverseScale * 0.01f; // 0.1f - базовый размер жука
 				bug.transform.LookAt(transform.position);
