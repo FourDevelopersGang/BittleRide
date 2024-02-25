@@ -9,19 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a745bce9a5b442ba82b755fe202f795, type: 3}
-  m_Name: UIViewIdDatabase
+  m_Script: {fileID: 11500000, guid: 4bd14fc30d004417a423cfdef2bd9ccf, type: 3}
+  m_Name: UIButtonIdDatabase
   m_EditorClassIdentifier: 
   Database:
     Items:
-    - Category: InGame
-      Name: Defeat
-    - Category: InGame
-      Name: Pause
-    - Category: InGame
-      Name: Win
+    - Category: Levels
+      Name: 1
+    - Category: Levels
+      Name: 2
+    - Category: Levels
+      Name: 3
+    - Category: Levels
+      Name: 4
+    - Category: Levels
+      Name: 5
+    - Category: Levels
+      Name: 6
     - Category: MainMenu
-      Name: MainMenu
+      Name: Exit
+    - Category: MainMenu
+      Name: Play
+    - Category: MainMenu
+      Name: Return
     - Category: MainMenu
       Name: SelectLevel
     - Category: MainMenu
