@@ -14329,6 +14329,7 @@ GameObject:
   - component: {fileID: 7309702725942613879}
   - component: {fileID: 7309702725942613878}
   - component: {fileID: 1236692606}
+  - component: {fileID: 8996999612135816312}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -14551,6 +14552,7 @@ SphereCollider:
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1236692606
+--- !u!114 &8996999612135816312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14567,6 +14569,9 @@ MonoBehaviour:
   levelUpRequirements:
     _keyData: 010000000200000003000000
     _valueData: 320000000a00000005000000
+  m_Script: {fileID: 11500000, guid: 73a9ceac5f7b43f990d5cd45f1a68502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7309702726001592957
 PrefabInstance:
   m_ObjectHideFlags: 0
