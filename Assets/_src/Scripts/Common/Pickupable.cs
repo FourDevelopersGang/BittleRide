@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace _src.Scripts.Common
 {
+	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Collider))]
 	public abstract class Pickupable : MonoBehaviour
 	{
@@ -24,6 +25,11 @@ namespace _src.Scripts.Common
 			_used = true;
 			_pickUpFeedbacks.PlayFeedbacks();
 			OnPickUp();
+		}
+
+		protected void Reset()
+		{
+			_used = false;
 		}
 
 		protected abstract void OnPickUp();

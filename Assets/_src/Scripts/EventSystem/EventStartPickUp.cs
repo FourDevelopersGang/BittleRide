@@ -7,7 +7,7 @@ namespace _src.Scripts.EventSystem
 	{
 		protected override void OnPickUp()
 		{
-			//todo start event
+			Destroy(gameObject, 3);
 		}
 	}
 }
