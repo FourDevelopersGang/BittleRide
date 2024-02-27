@@ -27,6 +27,7 @@ namespace _src.Scripts
 
 		private Animator _animator;
 
+		public event Action Deactivated;
 
 		private void Start()
 		{
@@ -42,6 +43,7 @@ namespace _src.Scripts
 			_destroyFeedbacks.PlayFeedbacks();
 			Destroy(_rb);
 			_animator.enabled = false;
+			Deactivated?.Invoke();
 		}
 	}
 }

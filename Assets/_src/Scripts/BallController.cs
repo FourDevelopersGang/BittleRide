@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,6 +11,13 @@ public class BallController : MonoBehaviour
     private bool isDragging = false;
     [SerializeField, Required]
     private Camera _camera;
+
+    public static BallController Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
