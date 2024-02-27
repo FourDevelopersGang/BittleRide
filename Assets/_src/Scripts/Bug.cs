@@ -9,7 +9,7 @@ namespace _src.Scripts
 	public class Bug : MonoBehaviour
 	{
 		[SerializeField]
-		private float _size;
+		private float _level;
 
 
 		[SerializeField]
@@ -18,7 +18,7 @@ namespace _src.Scripts
 		private MMF_Player _destroyFeedbacks;
 
 
-		public float Size => _size;
+		public float Level => _level;
 
 
 		private Collider _collider;
