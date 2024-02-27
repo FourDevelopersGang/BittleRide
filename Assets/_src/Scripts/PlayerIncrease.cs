@@ -4,6 +4,7 @@ using System.Linq;
 using Cinemachine;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Doozy.Runtime.Signals;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -57,6 +58,10 @@ namespace _src.Scripts
 		private Rigidbody _rb;
 
 
+		[SerializeField, Required,ChildGameObjectsOnly]
+		private SignalSender _defeatSignal;
+
+
 		private void Start()
 		{
 			_rb = GetComponent<Rigidbody>();
@@ -74,7 +79,7 @@ namespace _src.Scripts
 				}
 				else
 				{
-					DecreaseSize();
+					_defeatSignal.SendSignal();
 					Destroy(other.gameObject);
 				}
 			}
@@ -92,7 +97,7 @@ namespace _src.Scripts
 				}
 				else
 				{
-					DecreaseSize();
+					_defeatSignal.SendSignal();
 					Destroy(other.gameObject);
 				}
 			}
