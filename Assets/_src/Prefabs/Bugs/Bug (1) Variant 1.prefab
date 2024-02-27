@@ -875,6 +875,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5244625124033700023, guid: a5dbe13444f2a8f47b3deabd41284444,
         type: 3}
+      propertyPath: _level
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5244625124033700023, guid: a5dbe13444f2a8f47b3deabd41284444,
+        type: 3}
       propertyPath: _destroyFeedbacks
       value: 
       objectReference: {fileID: 8057427525846766747}
