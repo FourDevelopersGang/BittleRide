@@ -19,9 +19,16 @@ namespace _src.Scripts
 	)]
 	public class PlayerIncrease : MonoBehaviour
 	{
-		// Используется как "уровень" или "сила" игрока, а не как физический размер
+		
 		[SerializeField]
-		private float _size = 1f;
+		private float _level = 0f;
+		
+		public float CurrentLevel
+		{
+			get => _level;
+
+			set => _level = value;
+		}
 
 
 		// Фактический физический размер игрока в Unity
@@ -49,8 +56,6 @@ namespace _src.Scripts
 
 
 		public UnityEvent OnIncreaseSize = new();
-
-		public UnityEvent OnDecreaseSize = new();
 
 		private List<Bug> _smashedBugs = new();
 
@@ -110,7 +115,6 @@ namespace _src.Scripts
 			{
 				_rb.mass += 3;
 				OnIncreaseSize.Invoke();
-				_size += 1; // Увеличиваем "уровень" игрока
 				_physicalSize += _increaseSizeValue; // Точное увеличение физического размера
 
 				UpdateScaleAndCameraOffset();
@@ -123,9 +127,7 @@ namespace _src.Scripts
 		{
 			if (_physicalSize - _increaseSizeValue >= _minSize) // Уменьшаем размер, если не меньше минимума
 			{
-				OnDecreaseSize.Invoke();
-
-				_size = Mathf.Max(_size - 1,
+				_level = Mathf.Max(_level - 1,
 					1
 				); // Уменьшаем "уровень" игрока, не опускаясь ниже 1
 
@@ -208,6 +210,6 @@ namespace _src.Scripts
 		}
 
 
-		private bool IsBugLowerThenPlayer(Bug bug) => bug.Size < _size; // Сравнение уровня игрока и жука
+		private bool IsBugLowerThenPlayer(Bug bug) => bug.Level <= _level; 
 	}
 }
