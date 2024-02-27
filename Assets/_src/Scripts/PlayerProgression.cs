@@ -16,7 +16,8 @@ public class PlayerProgression : MonoBehaviour
 
 
 	private int bugsToLevelUp = 100; // Необходимое количество жуков для повышения уровня
-	private int currentLevel = 1; // Текущий уровень игрока
+	[SerializeField, ReadOnly]
+	private int currentLevel = 0; // Текущий уровень игрока
 
 
 	public int CurrentLevel => currentLevel;
@@ -29,6 +30,9 @@ public class PlayerProgression : MonoBehaviour
 	private UnityDictionary<int, int> levelUpRequirements = new();
 
 
+	public UnityDictionary<int, int> LevelUpRequirements => levelUpRequirements;
+
+
 	private void Start()
 	{
 		if (_playerIncrease != null)
@@ -36,6 +40,8 @@ public class PlayerProgression : MonoBehaviour
 			// Подписываемся на событие OnIncreaseSize
 			_playerIncrease.OnIncreaseSize.AddListener(HandleIncreaseSize);
 		}
+
+		bugsToLevelUp = levelUpRequirements[1];
 	}
 
 
@@ -52,7 +58,6 @@ public class PlayerProgression : MonoBehaviour
 		{
 			bugsSmashed = 0; // Сбрасываем счётчик жуков
 			currentLevel++; // Повышаем уровень
-			_playerIncrease.CurrentLevel = currentLevel; // Обновляем уровень в PlayerIncrease
 
 			if (levelUpRequirements.TryGetValue(currentLevel,
 				    out int nextLevelRequirement

@@ -19,18 +19,6 @@ namespace _src.Scripts
 	)]
 	public class PlayerIncrease : MonoBehaviour
 	{
-		
-		[SerializeField]
-		private float _level = 0f;
-		
-		public float CurrentLevel
-		{
-			get => _level;
-
-			set => _level = value;
-		}
-
-
 		// Фактический физический размер игрока в Unity
 		private float _physicalSize = 0.01f;
 
@@ -63,8 +51,12 @@ namespace _src.Scripts
 		private Rigidbody _rb;
 
 
-		[SerializeField, Required,ChildGameObjectsOnly]
+		[SerializeField, Required, ChildGameObjectsOnly]
 		private SignalSender _defeatSignal;
+
+
+		[SerializeField, Required]
+		private PlayerProgression _playerProgression;
 
 
 		private void Start()
@@ -77,12 +69,18 @@ namespace _src.Scripts
 		{
 			if (other.gameObject.CompareTag("Bug") && other.transform.TryGetComponent(out Bug bug))
 			{
-				if (IsBugLowerThenPlayer(bug))
+				if (bug.Level == _playerProgression.CurrentLevel)
+				{
+					OnIncreaseSize.Invoke();
+					IncreaseSize();
+					InsertBug(bug);
+				}
+				else if (bug.Level < _playerProgression.CurrentLevel)
 				{
 					IncreaseSize();
 					InsertBug(bug);
 				}
-				else
+				else if (bug.Level > _playerProgression.CurrentLevel)
 				{
 					_defeatSignal.SendSignal();
 					Destroy(other.gameObject);
@@ -95,12 +93,18 @@ namespace _src.Scripts
 		{
 			if (other.gameObject.CompareTag("Bug") && other.transform.TryGetComponent(out Bug bug))
 			{
-				if (IsBugLowerThenPlayer(bug))
+				if (bug.Level == _playerProgression.CurrentLevel)
+				{
+					OnIncreaseSize.Invoke();
+					IncreaseSize();
+					InsertBug(bug);
+				}
+				else if (bug.Level < _playerProgression.CurrentLevel)
 				{
 					IncreaseSize();
 					InsertBug(bug);
 				}
-				else
+				else if (bug.Level > _playerProgression.CurrentLevel)
 				{
 					_defeatSignal.SendSignal();
 					Destroy(other.gameObject);
@@ -114,7 +118,6 @@ namespace _src.Scripts
 			if (_physicalSize + _increaseSizeValue <= _maxSize) // Увеличиваем размер, если не превышен максимум
 			{
 				_rb.mass += 3;
-				OnIncreaseSize.Invoke();
 				_physicalSize += _increaseSizeValue; // Точное увеличение физического размера
 
 				UpdateScaleAndCameraOffset();
@@ -127,10 +130,6 @@ namespace _src.Scripts
 		{
 			if (_physicalSize - _increaseSizeValue >= _minSize) // Уменьшаем размер, если не меньше минимума
 			{
-				_level = Mathf.Max(_level - 1,
-					1
-				); // Уменьшаем "уровень" игрока, не опускаясь ниже 1
-
 				_physicalSize -= _increaseSizeValue; // Точное уменьшение физического размера
 				UpdateScaleAndCameraOffset();
 				AdjustBugsScale();
@@ -199,17 +198,16 @@ namespace _src.Scripts
 			foreach (var bug in _smashedBugs)
 			{
 				bug.transform.localScale = Vector3.zero;
+
 				// Применяем обратный масштаб к каждому жуку, чтобы их размер оставался постоянным в мировом пространстве
 				bug.transform.localScale = inverseScale * 0.01f; // 0.1f - базовый размер жука
 				bug.transform.LookAt(transform.position);
+
 				bug.transform.Rotate(-90,
 					0f,
 					0f
 				);
 			}
 		}
-
-
-		private bool IsBugLowerThenPlayer(Bug bug) => bug.Level <= _level; 
 	}
 }

@@ -4768,7 +4768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6576250543945880216
 Transform:
   m_ObjectHideFlags: 0
@@ -14328,6 +14328,7 @@ GameObject:
   - component: {fileID: 7309702725942613873}
   - component: {fileID: 7309702725942613879}
   - component: {fileID: 7309702725942613878}
+  - component: {fileID: 1236692606}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -14526,7 +14527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d21448c727b43abb3085d658839e001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: 1
   _minSize: 0.01
   _maxSize: 1
   _cinemachineVirtualCamera: {fileID: 0}
@@ -14535,10 +14535,8 @@ MonoBehaviour:
   OnIncreaseSize:
     m_PersistentCalls:
       m_Calls: []
-  OnDecreaseSize:
-    m_PersistentCalls:
-      m_Calls: []
-  _defeatSignal: {fileID: 0}
+  _defeatSignal: {fileID: 2187932839726844507}
+  _playerProgression: {fileID: 0}
 --- !u!135 &7309702725942613878
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14552,6 +14550,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1236692606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7309702725942613832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9b69d29aff4ad580c2e55dfde0e234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerIncrease: {fileID: 7309702725942613879}
+  bugsSmashed: 0
+  levelUpRequirements:
+    _keyData: 010000000200000003000000
+    _valueData: 320000000a00000005000000
 --- !u!1001 &7309702726001592957
 PrefabInstance:
   m_ObjectHideFlags: 0
