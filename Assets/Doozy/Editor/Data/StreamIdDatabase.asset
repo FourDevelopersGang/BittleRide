@@ -15,7 +15,11 @@ MonoBehaviour:
   Database:
     Items:
     - Category: InGameSignals
+      Name: EndGameEvent
+    - Category: InGameSignals
       Name: Loose
+    - Category: InGameSignals
+      Name: StartGameEvent
     - Category: InGameSignals
       Name: Win
     - Category: None

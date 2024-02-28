@@ -10,11 +10,9 @@ namespace _src.Scripts.Common
 	[RequireComponent(typeof(Collider))]
 	public abstract class Pickupable : MonoBehaviour
 	{
-		[SerializeField]
-		[Required]
-		[ChildGameObjectsOnly]
+		[SerializeField, Required, ChildGameObjectsOnly]
 		private MMF_Player _pickUpFeedbacks;
-		
+
 		private bool _used;
 
 		public void PickUp()

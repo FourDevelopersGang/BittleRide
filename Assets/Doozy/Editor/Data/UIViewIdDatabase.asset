@@ -17,6 +17,8 @@ MonoBehaviour:
     - Category: InGame
       Name: Defeat
     - Category: InGame
+      Name: GameEvents
+    - Category: InGame
       Name: InGameGUI
     - Category: InGame
       Name: Pause

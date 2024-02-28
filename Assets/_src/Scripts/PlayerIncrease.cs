@@ -45,6 +45,9 @@ namespace _src.Scripts
 
 		public UnityEvent OnIncreaseSize = new();
 
+		public UnityEvent OnKillBug = new();
+
+		
 		private List<Bug> _smashedBugs = new();
 
 
@@ -160,6 +163,7 @@ namespace _src.Scripts
 		private void InsertBug(Bug bug)
 		{
 			bug.Deactivate();
+			OnKillBug.Invoke();
 
 			if (!_smashedBugs.Contains(bug))
 				_smashedBugs.Add(bug);
