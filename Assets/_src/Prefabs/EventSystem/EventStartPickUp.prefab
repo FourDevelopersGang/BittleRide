@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pickUpFeedbacks: {fileID: 1481131813025675840}
+  _gameEventsSystem: {fileID: 0}
+  _gameEventType: 0
 --- !u!1 &6516958336980388221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,7 +1022,8 @@ MonoBehaviour:
         MaxVolume: 1
         MinPitch: 1
         MaxPitch: 1
-        SfxAudioMixerGroup: {fileID: 0}
+        SfxAudioMixerGroup: {fileID: -3165942800488051908, guid: 7e984f512e89b60468e829489e8883e3,
+          type: 2}
         Priority: 128
         PanStereo: 0
         SpatialBlend: 0
