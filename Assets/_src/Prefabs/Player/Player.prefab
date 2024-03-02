@@ -14329,10 +14329,9 @@ GameObject:
   - component: {fileID: 7309702725942613879}
   - component: {fileID: 7309702725942613878}
   - component: {fileID: 8996999612135816312}
-  - component: {fileID: 269409873592891670}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14539,8 +14538,12 @@ MonoBehaviour:
   OnKillBug:
     m_PersistentCalls:
       m_Calls: []
+  _smashedBugs: []
   _defeatSignal: {fileID: 2187932839726844507}
   _playerProgression: {fileID: 8996999612135816312}
+  _spheresRadius: 1
+  _spheresCount: 30
+  _randomPositions: []
 --- !u!135 &7309702725942613878
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14566,24 +14569,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9b69d29aff4ad580c2e55dfde0e234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerIncrease: {fileID: 7309702725942613879}
+  _playerBugSmasher: {fileID: 0}
   bugsSmashed: 0
   currentLevel: 0
   levelUpRequirements:
     _keyData: 010000000200000003000000
     _valueData: 050000001900000064000000
---- !u!114 &269409873592891670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7309702725942613832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73a9ceac5f7b43f990d5cd45f1a68502, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7309702726001592957
 PrefabInstance:
   m_ObjectHideFlags: 0

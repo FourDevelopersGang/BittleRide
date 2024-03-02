@@ -10,7 +10,7 @@ namespace _src.Scripts
 		private Slider _progressFill;
 
 		[SerializeField, Required]
-		private PlayerIncrease _playerIncrease;
+		private PlayerBugSmasher _playerBugSmasher;
 
 		[SerializeField, Required]
 		private PlayerProgression _playerProgression;
@@ -21,7 +21,7 @@ namespace _src.Scripts
 
 		private void Start()
 		{
-			_playerIncrease.OnIncreaseSize.AddListener(IncrementProgress);
+			_playerBugSmasher.OnIncreaseSize.AddListener(IncrementProgress);
 			_currentProgress = 0f;
 			_progressFill.value = CalculateFillAmount();
 		}
@@ -63,9 +63,9 @@ namespace _src.Scripts
 
 		private void OnDestroy()
 		{
-			if (_playerIncrease != null)
+			if (_playerBugSmasher != null)
 			{
-				_playerIncrease.OnIncreaseSize.RemoveListener(IncrementProgress);
+				_playerBugSmasher.OnIncreaseSize.RemoveListener(IncrementProgress);
 			}
 		}
 	}

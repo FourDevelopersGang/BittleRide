@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerProgression : MonoBehaviour
 {
 	[SerializeField]
-	private PlayerIncrease _playerIncrease; // Ссылка на скрипт PlayerIncrease
+	private PlayerBugSmasher _playerBugSmasher; // Ссылка на скрипт PlayerIncrease
 
 
 	[SerializeField, ReadOnly]
@@ -38,10 +38,10 @@ public class PlayerProgression : MonoBehaviour
 
 	private void Start()
 	{
-		if (_playerIncrease != null)
+		if (_playerBugSmasher != null)
 		{
 			// Подписываемся на событие OnIncreaseSize
-			_playerIncrease.OnIncreaseSize.AddListener(HandleIncreaseSize);
+			_playerBugSmasher.OnIncreaseSize.AddListener(HandleIncreaseSize);
 		}
 
 		bugsToLevelUp = levelUpRequirements[1];
@@ -74,10 +74,10 @@ public class PlayerProgression : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		if (_playerIncrease != null)
+		if (_playerBugSmasher != null)
 		{
 			// Отписываемся от события OnIncreaseSize
-			_playerIncrease.OnIncreaseSize.RemoveListener(HandleIncreaseSize);
+			_playerBugSmasher.OnIncreaseSize.RemoveListener(HandleIncreaseSize);
 		}
 	}
 }
