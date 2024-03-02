@@ -36,6 +36,7 @@ namespace _src.Scripts
 
 
 		[SerializeField]
+		[OnValueChanged("GenerateRandomPositions")]
 		private float _centerOfSphereDelta = 2.5f;
 
 
@@ -47,7 +48,7 @@ namespace _src.Scripts
 
 		public UnityEvent OnKillBug = new();
 
-		
+		[SerializeField, ReadOnly]
 		private List<Bug> _smashedBugs = new();
 
 
@@ -62,6 +63,19 @@ namespace _src.Scripts
 		private PlayerProgression _playerProgression;
 
 
+		[FoldoutGroup("Gizmos settings")]
+		[SerializeField]
+		private float _spheresRadius = 1;
+
+
+		[FoldoutGroup("Gizmos settings")]
+		[SerializeField]
+		private float _spheresCount = 30;
+
+		[SerializeField, ReadOnly]
+		private List<Vector3> _randomPositions = new();
+
+
 		private void Start()
 		{
 			_rb = GetComponent<Rigidbody>();
@@ -74,14 +88,14 @@ namespace _src.Scripts
 			{
 				if (bug.Level == _playerProgression.CurrentLevel)
 				{
-					OnIncreaseSize.Invoke();
-					IncreaseSize();
 					InsertBug(bug);
+					IncreaseSize();
+					OnIncreaseSize.Invoke();
 				}
 				else if (bug.Level < _playerProgression.CurrentLevel)
 				{
-					IncreaseSize();
 					InsertBug(bug);
+					IncreaseSize();
 				}
 				else if (bug.Level > _playerProgression.CurrentLevel)
 				{
@@ -98,14 +112,14 @@ namespace _src.Scripts
 			{
 				if (bug.Level == _playerProgression.CurrentLevel)
 				{
-					OnIncreaseSize.Invoke();
-					IncreaseSize();
 					InsertBug(bug);
+					IncreaseSize();
+					OnIncreaseSize.Invoke();
 				}
 				else if (bug.Level < _playerProgression.CurrentLevel)
 				{
-					IncreaseSize();
 					InsertBug(bug);
+					IncreaseSize();
 				}
 				else if (bug.Level > _playerProgression.CurrentLevel)
 				{
@@ -124,7 +138,7 @@ namespace _src.Scripts
 				_physicalSize += _increaseSizeValue; // Точное увеличение физического размера
 
 				UpdateScaleAndCameraOffset();
-				AdjustBugsScale();
+				AdjustBugsScaleAndUpdatePositions();
 			}
 		}
 
@@ -135,7 +149,7 @@ namespace _src.Scripts
 			{
 				_physicalSize -= _increaseSizeValue; // Точное уменьшение физического размера
 				UpdateScaleAndCameraOffset();
-				AdjustBugsScale();
+				AdjustBugsScaleAndUpdatePositions();
 			}
 		}
 
@@ -162,39 +176,32 @@ namespace _src.Scripts
 
 		private void InsertBug(Bug bug)
 		{
-			bug.Deactivate();
-			OnKillBug.Invoke();
-
 			if (!_smashedBugs.Contains(bug))
 				_smashedBugs.Add(bug);
 			else
 				return;
-
+			bug.Deactivate();
+			OnKillBug.Invoke();
 			// Определяем точку для размещения на сфере, учитывая текущий масштаб игрока
 
 			// Делаем объект дочерним и устанавливаем начальную позицию
 			bug.transform.parent = transform;
-			bug.transform.localPosition = Vector3.zero;
-
+			Vector3 inverseScale = Vector3.one / transform.localScale.x;
+			bug.transform.localScale = Vector3.zero;
 			// Установим фиксированный масштаб для жука, предположим, что исходный масштаб жука подходит
-			bug.transform.localScale = new Vector3(0.1f,
-				0.1f,
-				0.1f
-			); // Можно настроить этот масштаб
-
-			// Ориентируем объект и перемещаем его к заданной точке
+			bug.transform.localScale = inverseScale * 0.01f; // 0.1f - базовый размер жука
 			bug.transform.LookAt(transform.position);
 
 			bug.transform.Rotate(-90,
 				0f,
 				0f
 			);
-
-			bug.transform.localPosition = Random.onUnitSphere / _centerOfSphereDelta;
+				
+			bug.transform.position =  GetRandomPositionWithCurrentScale();
 		}
 
 
-		private void AdjustBugsScale()
+		private void AdjustBugsScaleAndUpdatePositions()
 		{
 			// Рассчитываем обратный масштаб, основываясь на текущем масштабе игрока
 			Vector3 inverseScale = Vector3.one / transform.localScale.x; // Предполагая, что масштаб игрока одинаков по всем осям
@@ -211,6 +218,46 @@ namespace _src.Scripts
 					0f,
 					0f
 				);
+				
+				bug.transform.position =  GetRandomPositionWithCurrentScale();
+			}
+		}
+
+
+		[Button]
+		private void GenerateRandomPositions()
+		{
+			_randomPositions.Clear();
+
+			for (int i = 0; i < _spheresCount; i++)
+			{
+				_randomPositions.Add(Random.onUnitSphere * _centerOfSphereDelta * transform.localScale.x);
+			}
+		}
+
+
+		private Vector3 GetRandomPositionWithCurrentScale() => transform.position  + ( Random.onUnitSphere * _centerOfSphereDelta * transform.localScale.x);
+
+
+		[Button]
+		private void ClearGizmosPositions()
+		{
+			_randomPositions.Clear();
+		}
+
+
+		private void OnDrawGizmosSelected()
+		{
+			if (_randomPositions.Count > 0)
+			{
+				Gizmos.color = Color.green;
+
+				foreach (var position in _randomPositions)
+				{
+					Gizmos.DrawSphere(transform.position  + position,
+						_spheresRadius * transform.localScale.x
+					);
+				}
 			}
 		}
 	}
