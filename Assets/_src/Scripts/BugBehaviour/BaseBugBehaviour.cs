@@ -8,6 +8,8 @@ namespace _src.Scripts.BugBehaviour
     {
         [SerializeField] private Bug _bug;
 
+        protected Vector3 PlayerBallPosition => BallController.Instance.transform.position;
+
         private void OnEnable()
         {
             _bug.Deactivated += DeactivateBehaviour;
@@ -17,8 +19,6 @@ namespace _src.Scripts.BugBehaviour
         {
             _bug.Deactivated -= DeactivateBehaviour;
         }
-
-        protected Vector3 PlayerBallPosition => BallController.Instance.transform.position;
 
         private void DeactivateBehaviour()
         {
