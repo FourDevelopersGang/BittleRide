@@ -6,7 +6,6 @@ namespace _src.Scripts.BugBehaviour.Actions
     public class BugAttackAction : MonoBehaviour
     {
         [SerializeField] private float _damage;
-        [SerializeField] private string _attackAnimParam;
         [SerializeField] private Animator _bugAnimator;
 
         public bool IsAttacking { get; private set; }
