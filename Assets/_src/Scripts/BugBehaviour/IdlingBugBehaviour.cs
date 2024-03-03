@@ -6,7 +6,7 @@ namespace _src.Scripts.BugBehaviour
 {
     public class IdlingBugBehaviour : BaseBugBehaviour
     {
-        [SerializeField] private BugAttackAction _bugAttackAction;
+        [SerializeField] private BugMeleeAttackAction _bugMeleeAttackAction;
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private float _moveSpeed = 4f;
         [SerializeField] private float _agroDistance = 5f;
@@ -15,18 +15,18 @@ namespace _src.Scripts.BugBehaviour
         protected override void OnDeactivated()
         {
             _navMeshAgent.enabled = false;
-            _bugAttackAction.Deactivate();
+            _bugMeleeAttackAction.Deactivate();
         }
 
         private void Update()
         {
-            if (!_navMeshAgent.isOnNavMesh || _navMeshAgent.pathPending || _bugAttackAction.IsAttacking)
+            if (!_navMeshAgent.isOnNavMesh || _navMeshAgent.pathPending || _bugMeleeAttackAction.IsAttacking)
                 return;
 
             if (IsPlayerBallWithinDistance(_attackDistance))
             {
                 _navMeshAgent.speed = 0f;
-                _bugAttackAction.PerformAttack();
+                _bugMeleeAttackAction.PerformAttack();
                 return;
             }
 

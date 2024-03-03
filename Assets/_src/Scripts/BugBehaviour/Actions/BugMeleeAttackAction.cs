@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace _src.Scripts.BugBehaviour.Actions
 {
-    public class BugAttackAction : MonoBehaviour
+    public class BugMeleeAttackAction : MonoBehaviour
     {
         [SerializeField] private float _damage;
-        [SerializeField] private Animator _bugAnimator;
+        [SerializeField] private Animator _animator;
 
         public bool IsAttacking { get; private set; }
         
