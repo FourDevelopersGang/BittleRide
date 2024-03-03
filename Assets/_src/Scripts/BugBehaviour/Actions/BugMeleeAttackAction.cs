@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using _src.Scripts.Animations;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _src.Scripts.BugBehaviour.Actions
@@ -23,15 +24,14 @@ namespace _src.Scripts.BugBehaviour.Actions
 
         private async UniTask Attack()
         {
-            Debug.Log("Attack");
-            IsAttacking = true;
+            _animator.SetTrigger(AnimParams.Attack);
             await UniTask.WaitForSeconds(2f);
-            IsAttacking = false;
         }
 
         public void Deactivate()
         {
-            // TODO Disable animator
+            _animator.ResetTrigger(AnimParams.Attack);
+            IsAttacking = false;
         }
     }
 }

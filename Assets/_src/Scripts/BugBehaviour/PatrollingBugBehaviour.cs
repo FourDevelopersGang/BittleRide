@@ -1,5 +1,4 @@
-﻿using System;
-using _src.Scripts.BugBehaviour.Actions;
+﻿using _src.Scripts.BugBehaviour.Actions;
 using _src.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.AI;

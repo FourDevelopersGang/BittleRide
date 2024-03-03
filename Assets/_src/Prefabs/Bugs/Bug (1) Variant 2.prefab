@@ -930,20 +930,6 @@ MonoBehaviour:
   _maxWaitAfterPatrolTime: 1.5
   _agroDistance: 0.5
   _attackDistance: 0.2
---- !u!114 &9182319036765759803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4813505112109928422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbbf076f17454fa5bdf3894913942d89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damage: 5
-  _animator: {fileID: 8352424796465336372}
 --- !u!195 &2399911961323972374
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -966,6 +952,20 @@ NavMeshAgent:
   m_BaseOffset: -0.7
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &9182319036765759803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813505112109928422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbbf076f17454fa5bdf3894913942d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 5
+  _animator: {fileID: 8352424796465336372}
 --- !u!114 &4813505112109928423 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5244625124033700023, guid: a5dbe13444f2a8f47b3deabd41284444,
@@ -1083,6 +1083,27 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7e7f7a52576e81941b5ff85a3be79962, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c76e1dd902d7cfe488a45d500f98d871, type: 3}
+--- !u!1 &3333290864401617140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c76e1dd902d7cfe488a45d500f98d871,
+    type: 3}
+  m_PrefabInstance: {fileID: 2486923437130100133}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4353501366992209652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3333290864401617140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53302fb1d7234d1cab9374067f3000d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bug: {fileID: 4813505112109928423}
+  _navMeshAgent: {fileID: 2399911961323972374}
+  _animator: {fileID: 8352424796465336372}
 --- !u!95 &8352424796465336372 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: c76e1dd902d7cfe488a45d500f98d871,
