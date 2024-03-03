@@ -1,5 +1,6 @@
 ﻿using System;
 using _src.Scripts.BugBehaviour.Actions;
+using _src.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -82,7 +83,7 @@ namespace _src.Scripts.BugBehaviour
 
         private Vector3 FindPatrolPosition()
         {
-            var patrolPosition = transform.position + GetRandomHorizontalOffset() * _maxPatrolDistance;
+            var patrolPosition = transform.position + RandomUtils.GetRandomHorizontalOffset() * _maxPatrolDistance;
             if (NavMesh.SamplePosition(patrolPosition, out var hit, _maxPatrolDistance, NavMesh.AllAreas))
                 return hit.position;
 

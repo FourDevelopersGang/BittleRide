@@ -1,5 +1,6 @@
 ﻿using System;
 using _src.Scripts.BugBehaviour.Actions;
+using _src.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -71,7 +72,7 @@ namespace _src.Scripts.BugBehaviour
         
         private Vector3 FindWanderDestination()
         {
-            var wanderPosition = _wanderOrigin + GetRandomHorizontalOffset() * _maxWanderDistance;
+            var wanderPosition = _wanderOrigin + RandomUtils.GetRandomHorizontalOffset() * _maxWanderDistance;
             if (NavMesh.SamplePosition(wanderPosition, out var hit, _maxWanderDistance, NavMesh.AllAreas))
                 return hit.position;
 

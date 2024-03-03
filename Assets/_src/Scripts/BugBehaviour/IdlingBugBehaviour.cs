@@ -1,5 +1,4 @@
 ﻿using _src.Scripts.BugBehaviour.Actions;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 
