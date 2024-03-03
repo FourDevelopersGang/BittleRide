@@ -89,5 +89,14 @@ namespace _src.Scripts.BugBehaviour
             Debug.LogError("Patrol position not found");
             return transform.position;
         }
+        
+        private void OnDrawGizmos()
+        {
+            if (IsPlayerBallWithinDistance(_attackDistance))
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(transform.position, PlayerBallPosition);
+            }
+        }
     }
 }

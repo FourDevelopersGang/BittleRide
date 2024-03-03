@@ -1,6 +1,8 @@
-﻿using _src.Scripts.BugBehaviour.Actions;
+﻿using System;
+using _src.Scripts.BugBehaviour.Actions;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace _src.Scripts.BugBehaviour
 {
@@ -75,6 +77,15 @@ namespace _src.Scripts.BugBehaviour
 
             Debug.LogError("Wander destination not found");
             return transform.position;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (IsPlayerBallWithinDistance(_attackDistance))
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(transform.position, PlayerBallPosition);
+            }
         }
     }
 }

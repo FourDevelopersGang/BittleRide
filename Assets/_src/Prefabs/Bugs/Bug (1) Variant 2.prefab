@@ -924,26 +924,12 @@ MonoBehaviour:
   _bug: {fileID: 4813505112109928423}
   _bugAttackAction: {fileID: 9182319036765759803}
   _navMeshAgent: {fileID: 6445824759075295860}
-  _moveSpeed: 4
-  _maxPatrolDistance: 8
+  _moveSpeed: 0.4
+  _maxPatrolDistance: 0.8
   _minWaitAfterPatrolTime: 1
   _maxWaitAfterPatrolTime: 1.5
-  _agroDistance: 5
-  _attackDistance: 2
---- !u!114 &9182319036765759803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4813505112109928422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbbf076f17454fa5bdf3894913942d89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damage: 5
-  _bugAnimator: {fileID: 8352424796465336372}
+  _agroDistance: 0.5
+  _attackDistance: 0.2
 --- !u!195 &6445824759075295860
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -963,9 +949,23 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.7
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &9182319036765759803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813505112109928422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbbf076f17454fa5bdf3894913942d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 5
+  _bugAnimator: {fileID: 8352424796465336372}
 --- !u!114 &4813505112109928423 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5244625124033700023, guid: a5dbe13444f2a8f47b3deabd41284444,

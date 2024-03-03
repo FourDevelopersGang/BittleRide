@@ -904,38 +904,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.2695208, y: 1.1889843, z: 4.394678}
   m_Center: {x: -0.29553622, y: 0.6139846, z: -1.0284}
---- !u!114 &7609677123307017442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4813505112109928422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13508c88f606496d90145cd2c4d6b29c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bug: {fileID: 4813505112109928423}
-  _bugAttackAction: {fileID: 9132711248945855099}
-  _navMeshAgent: {fileID: 6089734177703791630}
-  _moveSpeed: 4
-  _agroDistance: 5
-  _attackDistance: 2
---- !u!114 &9132711248945855099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4813505112109928422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbbf076f17454fa5bdf3894913942d89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damage: 10
-  _bugAnimator: {fileID: 8352424796465336372}
 --- !u!195 &6089734177703791630
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -955,9 +923,41 @@ NavMeshAgent:
   m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.35
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7609677123307017442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813505112109928422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13508c88f606496d90145cd2c4d6b29c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bug: {fileID: 4813505112109928423}
+  _bugAttackAction: {fileID: 9132711248945855099}
+  _navMeshAgent: {fileID: 6089734177703791630}
+  _moveSpeed: 0.4
+  _agroDistance: 1
+  _attackDistance: 0.2
+--- !u!114 &9132711248945855099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813505112109928422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbbf076f17454fa5bdf3894913942d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
+  _bugAnimator: {fileID: 8352424796465336372}
 --- !u!114 &4813505112109928423 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5244625124033700023, guid: a5dbe13444f2a8f47b3deabd41284444,

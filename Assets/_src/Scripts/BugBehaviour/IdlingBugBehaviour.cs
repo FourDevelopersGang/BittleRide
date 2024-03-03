@@ -40,5 +40,14 @@ namespace _src.Scripts.BugBehaviour
 
             _navMeshAgent.speed = 0f;
         }
+        
+        private void OnDrawGizmos()
+        {
+            if (IsPlayerBallWithinDistance(_attackDistance))
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(transform.position, PlayerBallPosition);
+            }
+        }
     }
 }
