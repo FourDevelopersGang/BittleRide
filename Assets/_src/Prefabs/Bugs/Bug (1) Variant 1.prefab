@@ -942,7 +942,7 @@ MonoBehaviour:
   _bugMeleeAttackAction: {fileID: 9132711248945855099}
   _navMeshAgent: {fileID: 797630163120001215}
   _boxCollider: {fileID: 1037597043506224951}
-  _moveSpeed: 0.4
+  _moveSpeed: 0.13
   _agroDistance: 1
 --- !u!114 &9132711248945855099
 MonoBehaviour:

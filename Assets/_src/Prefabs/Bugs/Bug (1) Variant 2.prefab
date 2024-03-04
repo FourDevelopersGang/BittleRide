@@ -925,12 +925,11 @@ MonoBehaviour:
   _attackAction: {fileID: 9182319036765759803}
   _navMeshAgent: {fileID: 2399911961323972374}
   _boxCollider: {fileID: 1037597043506224951}
-  _moveSpeed: 0.4
+  _moveSpeed: 0.13
   _maxPatrolDistance: 0.8
   _minWaitAfterPatrolTime: 1
   _maxWaitAfterPatrolTime: 1.5
   _agroDistance: 0.5
-  _attackDistance: 0.2
 --- !u!195 &2399911961323972374
 NavMeshAgent:
   m_ObjectHideFlags: 0
