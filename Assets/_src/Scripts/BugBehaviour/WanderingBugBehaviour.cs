@@ -16,7 +16,6 @@ namespace _src.Scripts.BugBehaviour
         [SerializeField] private float _minWaitAfterWanderTime = 1f;
         [SerializeField] private float _maxWaitAfterWanderTime = 1.5f;
         [SerializeField] private float _agroDistance = 5f;
-        [SerializeField] private float _attackDistance = 2f;
 
         private Vector3 _wanderOrigin;
         private float _idleWaitTimer;
@@ -37,10 +36,11 @@ namespace _src.Scripts.BugBehaviour
             if (!_navMeshAgent.isOnNavMesh || _navMeshAgent.pathPending || _bugMeleeAttackAction.IsAttacking)
                 return;
 
-            if (IsPlayerBallWithinDistance(_attackDistance))
+            var attackDistance = CalculateAttackDistance(_boxCollider);
+            if (IsPlayerBallWithinDistance(attackDistance))
             {
                 _navMeshAgent.speed = 0f;
-                _bugMeleeAttackAction.PerformAttack(MeleeAttackState.CalculateDefault(_attackDistance, _boxCollider));
+                _bugMeleeAttackAction.PerformAttack(MeleeAttackState.CreateDefault(attackDistance));
                 return;
             }
 
@@ -85,7 +85,7 @@ namespace _src.Scripts.BugBehaviour
             if (!Application.isPlaying)
                 return;
             
-            if (IsPlayerBallWithinDistance(_attackDistance))
+            if (IsPlayerBallWithinDistance(CalculateAttackDistance(_boxCollider)))
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(transform.position, PlayerBallPosition);

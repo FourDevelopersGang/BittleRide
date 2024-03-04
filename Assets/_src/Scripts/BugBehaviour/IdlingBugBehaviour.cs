@@ -11,7 +11,6 @@ namespace _src.Scripts.BugBehaviour
         [SerializeField] private BoxCollider _boxCollider;
         [SerializeField] private float _moveSpeed = 4f;
         [SerializeField] private float _agroDistance = 5f;
-        [SerializeField] private float _attackDistance = 2f;
 
         protected override void OnDeactivated()
         {
@@ -24,10 +23,11 @@ namespace _src.Scripts.BugBehaviour
             if (!_navMeshAgent.isOnNavMesh || _navMeshAgent.pathPending || _bugMeleeAttackAction.IsAttacking)
                 return;
 
-            if (IsPlayerBallWithinDistance(_attackDistance))
+            var attackDistance = CalculateAttackDistance(_boxCollider);
+            if (IsPlayerBallWithinDistance(attackDistance))
             {
                 _navMeshAgent.speed = 0f;
-                _bugMeleeAttackAction.PerformAttack(MeleeAttackState.CalculateDefault(_attackDistance, _boxCollider));
+                _bugMeleeAttackAction.PerformAttack(MeleeAttackState.CreateDefault(attackDistance));
                 return;
             }
 
@@ -46,7 +46,7 @@ namespace _src.Scripts.BugBehaviour
             if (!Application.isPlaying)
                 return;
             
-            if (IsPlayerBallWithinDistance(_attackDistance))
+            if (IsPlayerBallWithinDistance(CalculateAttackDistance(_boxCollider)))
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(transform.position, PlayerBallPosition);

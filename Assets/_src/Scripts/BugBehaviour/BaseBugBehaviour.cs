@@ -36,7 +36,14 @@ namespace _src.Scripts.BugBehaviour
             var sqrDistToTarget = (target.transform.position - transform.position).sqrMagnitude;
             return sqrDistToTarget <= attackDistance * attackDistance;
         }
-        
 
+        protected float CalculateAttackDistance(BoxCollider selfCollider)
+        {
+            var target = BallController.Instance;
+            var halfBody = selfCollider.bounds.extents.z;
+            var mandatoryDistance = halfBody + target.Radius;
+            var totalDistance = mandatoryDistance + halfBody;
+            return totalDistance;
+        }
     }
 }
