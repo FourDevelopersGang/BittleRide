@@ -1,4 +1,6 @@
-﻿namespace _src.Scripts.BugBehaviour
+﻿using UnityEngine;
+
+namespace _src.Scripts.BugBehaviour
 {
     public struct MeleeAttackState
     {
@@ -7,15 +9,15 @@
         public float Damage;
         public BallController Target;
 
-        public static MeleeAttackState CreateDefault(float behaviourAttackDistance)
+        public static MeleeAttackState CalculateDefault(float attackDistance, BoxCollider selfCollider)
         {
             var target = BallController.Instance;
-            var attackDistance = target.Radius + behaviourAttackDistance + 0.1f;
+            var calculatedAttackDistance = selfCollider.bounds.extents.z + attackDistance + target.Radius + 0.1f;
 
             return new MeleeAttackState
             {
                 AttackArcAngle = 50f,
-                AttackDistance = attackDistance,
+                AttackDistance = calculatedAttackDistance,
                 Damage = 1,
                 Target = target
             };

@@ -8,6 +8,7 @@ namespace _src.Scripts.BugBehaviour
     {
         [SerializeField] private BugMeleeAttackAction _bugMeleeAttackAction;
         [SerializeField] private NavMeshAgent _navMeshAgent;
+        [SerializeField] private BoxCollider _boxCollider;
         [SerializeField] private float _moveSpeed = 4f;
         [SerializeField] private float _agroDistance = 5f;
         [SerializeField] private float _attackDistance = 2f;
@@ -26,7 +27,7 @@ namespace _src.Scripts.BugBehaviour
             if (IsPlayerBallWithinDistance(_attackDistance))
             {
                 _navMeshAgent.speed = 0f;
-                _bugMeleeAttackAction.PerformAttack(MeleeAttackState.CreateDefault(_attackDistance));
+                _bugMeleeAttackAction.PerformAttack(MeleeAttackState.CalculateDefault(_attackDistance, _boxCollider));
                 return;
             }
 
@@ -42,6 +43,9 @@ namespace _src.Scripts.BugBehaviour
         
         private void OnDrawGizmos()
         {
+            if (!Application.isPlaying)
+                return;
+            
             if (IsPlayerBallWithinDistance(_attackDistance))
             {
                 Gizmos.color = Color.red;

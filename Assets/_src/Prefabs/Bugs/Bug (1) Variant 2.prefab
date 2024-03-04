@@ -924,6 +924,7 @@ MonoBehaviour:
   _bug: {fileID: 4813505112109928423}
   _attackAction: {fileID: 9182319036765759803}
   _navMeshAgent: {fileID: 2399911961323972374}
+  _boxCollider: {fileID: 1037597043506224951}
   _moveSpeed: 0.4
   _maxPatrolDistance: 0.8
   _minWaitAfterPatrolTime: 1
@@ -964,7 +965,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbbf076f17454fa5bdf3894913942d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
   _animator: {fileID: 8352424796465336372}
 --- !u!114 &4813505112109928423 stripped
 MonoBehaviour:
