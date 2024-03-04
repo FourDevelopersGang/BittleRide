@@ -11,8 +11,10 @@ namespace _src.Scripts.BugBehaviour.Actions
 
         private BugAttackEventListener _attackEventListener;
         private MeleeAttackState _state;
-        
-        public bool IsAttacking { get; private set; }
+        private bool _isWaitingForEvent;
+        private bool _isAttacking;
+
+        public bool IsAttacking => _isAttacking;
 
         private void Awake()
         {
@@ -34,11 +36,13 @@ namespace _src.Scripts.BugBehaviour.Actions
         private void OnDisable()
         {
             _attackEventListener.Triggered -= ExecuteAttackHit;
+            _isAttacking = false;
+            _isWaitingForEvent = false;
         }
 
         public void PerformAttack(MeleeAttackState state)
         {
-            if (IsAttacking)
+            if (_isAttacking)
             {
                 Debug.LogError("Bug is already attacking");
                 return;
@@ -51,28 +55,49 @@ namespace _src.Scripts.BugBehaviour.Actions
         public void Deactivate()
         {
             _animator.ResetTrigger(AnimParams.Attack);
-            IsAttacking = false;
+            _isAttacking = false;
+            _isWaitingForEvent = false;
         }
 
         private async UniTask Attack()
         {
-            IsAttacking = true;
+            _isAttacking = true;
+            _isWaitingForEvent = true;
             _animator.SetTrigger(AnimParams.Attack);
             
             while (_animator && IsAttacking)
             {
+                if (_isWaitingForEvent)
+                {
+                    RotateTowardsTarget();
+                }
+                
                 var stateInfo = _animator.GetAnimatorTransitionInfo(0);
                 if (stateInfo.fullPathHash != 0)
                     break;
 
                 await UniTask.Yield();
             }
-            
-            IsAttacking = false;
+
+            _isAttacking = false;
+            _isWaitingForEvent = false;
+        }
+
+        private void RotateTowardsTarget()
+        {
+            var dirToTarget = _state.Target.transform.position - transform.position;
+            dirToTarget.y = 0;
+            var rotationToTarget = Quaternion.LookRotation(dirToTarget, Vector3.up);
+            var newRotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    rotationToTarget, 
+                    _state.AngularSpeed * Time.deltaTime);
+            transform.rotation = newRotation;
         }
 
         private void ExecuteAttackHit()
         {
+            _isWaitingForEvent = false;
             var nextStateInfo = _animator.GetNextAnimatorStateInfo(0);
             var isTransitioning = nextStateInfo.fullPathHash != 0;
             if (isTransitioning)

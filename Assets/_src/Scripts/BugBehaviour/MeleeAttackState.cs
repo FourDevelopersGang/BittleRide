@@ -7,6 +7,7 @@ namespace _src.Scripts.BugBehaviour
         public float AttackArcAngle;
         public float AttackDistance;
         public float Damage;
+        public float AngularSpeed;
         public BallController Target;
 
         public static MeleeAttackState CalculateDefault(float attackDistance, BoxCollider selfCollider)
@@ -19,7 +20,8 @@ namespace _src.Scripts.BugBehaviour
                 AttackArcAngle = 50f,
                 AttackDistance = calculatedAttackDistance,
                 Damage = 1,
-                Target = target
+                Target = target,
+                AngularSpeed = 360f,
             };
         }
     }
