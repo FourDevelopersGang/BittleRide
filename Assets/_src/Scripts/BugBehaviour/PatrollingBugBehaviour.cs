@@ -30,6 +30,7 @@ namespace _src.Scripts.BugBehaviour
         
         private void Start()
         {
+            SnapToNavMesh(_navMeshAgent);
             _patrolPositionA = transform.position;
             _patrolPositionB = FindPatrolPosition();
             _navMeshAgent.SetDestination(_patrolPositionB);

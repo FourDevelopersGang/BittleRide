@@ -28,6 +28,7 @@ namespace _src.Scripts.BugBehaviour
 
         private void Start()
         {
+            SnapToNavMesh(_navMeshAgent);
             _wanderOrigin = transform.position;
         }
 

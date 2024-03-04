@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 namespace _src.Scripts.BugBehaviour
@@ -43,6 +44,14 @@ namespace _src.Scripts.BugBehaviour
             var halfBody = selfCollider.bounds.extents.z;
             var totalDistance = target.Radius + halfBody * 3;
             return totalDistance;
+        }
+
+        protected void SnapToNavMesh(NavMeshAgent navMeshAgent)
+        {
+            if (NavMesh.SamplePosition(transform.position, out var navHit, Mathf.Infinity, NavMesh.AllAreas))
+            {
+                navMeshAgent.Warp(navHit.position);
+            }
         }
     }
 }

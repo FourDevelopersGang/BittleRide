@@ -1,4 +1,5 @@
-﻿using _src.Scripts.BugBehaviour.Actions;
+﻿using System;
+using _src.Scripts.BugBehaviour.Actions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,11 @@ namespace _src.Scripts.BugBehaviour
         [SerializeField] private BoxCollider _boxCollider;
         [SerializeField] private float _moveSpeed = 4f;
         [SerializeField] private float _agroDistance = 5f;
+
+        private void Start()
+        {
+            SnapToNavMesh(_navMeshAgent);
+        }
 
         protected override void OnDeactivated()
         {
