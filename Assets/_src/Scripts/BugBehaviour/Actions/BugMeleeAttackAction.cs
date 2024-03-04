@@ -1,4 +1,5 @@
-﻿using _src.Scripts.Animations;
+﻿using System;
+using _src.Scripts.Animations;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -9,8 +10,32 @@ namespace _src.Scripts.BugBehaviour.Actions
         [SerializeField] private float _damage;
         [SerializeField] private Animator _animator;
 
-        public bool IsAttacking { get; private set; }
+        private BugAttackEventListener _attackEventListener;
         
+        public bool IsAttacking { get; private set; }
+
+        private void Awake()
+        {
+            if (_animator.TryGetComponent(out BugAttackEventListener listener))
+            {
+                _attackEventListener = listener;
+            }
+            else
+            {
+                _attackEventListener = _animator.gameObject.AddComponent<BugAttackEventListener>();
+            }
+        }
+
+        private void OnEnable()
+        {
+            _attackEventListener.Triggered += OnAttackTriggered;
+        }
+
+        private void OnDisable()
+        {
+            _attackEventListener.Triggered -= OnAttackTriggered;
+        }
+
         public void PerformAttack()
         {
             if (IsAttacking)
@@ -22,15 +47,31 @@ namespace _src.Scripts.BugBehaviour.Actions
             Attack().Forget();
         }
 
-        private async UniTask Attack()
+        private void OnAttackTriggered()
         {
-            _animator.SetTrigger(AnimParams.Attack);
-            await UniTask.WaitForSeconds(2f);
+            var nextStateInfo = _animator.GetNextAnimatorStateInfo(0);
+            var isTransitioning = nextStateInfo.fullPathHash != 0;
+            if (isTransitioning)
+                return;
+            
+            Debug.Log("Attack triggered");
         }
 
-        private void AttackHit()
+        private async UniTask Attack()
         {
-            Debug.Log("Animator attack event");
+            IsAttacking = true;
+            _animator.SetTrigger(AnimParams.Attack);
+            
+            while (_animator && IsAttacking)
+            {
+                var stateInfo = _animator.GetAnimatorTransitionInfo(0);
+                if (stateInfo.fullPathHash != 0)
+                    break;
+
+                await UniTask.Yield();
+            }
+            
+            IsAttacking = false;
         }
 
         public void Deactivate()

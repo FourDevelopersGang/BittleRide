@@ -72,9 +72,9 @@ namespace _src.Scripts.BugBehaviour
         private Vector3 FindWanderDestination()
         {
             var wanderPosition = _wanderOrigin + RandomUtils.GetRandomHorizontalOffset() * _maxWanderDistance;
-            if (NavMesh.SamplePosition(wanderPosition, out var hit, _maxWanderDistance, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(wanderPosition, out var hit, Mathf.Infinity, NavMesh.AllAreas))
                 return hit.position;
-
+            
             Debug.LogError("Wander destination not found");
             return transform.position;
         }
