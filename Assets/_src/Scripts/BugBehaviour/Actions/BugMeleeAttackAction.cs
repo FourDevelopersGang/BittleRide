@@ -71,10 +71,12 @@ namespace _src.Scripts.BugBehaviour.Actions
                 {
                     RotateTowardsTarget();
                 }
-                
-                var stateInfo = _animator.GetAnimatorTransitionInfo(0);
-                if (stateInfo.fullPathHash != 0)
-                    break;
+                else
+                {
+                    var stateInfo = _animator.GetAnimatorTransitionInfo(0);
+                    if (stateInfo.fullPathHash != 0)
+                        break;
+                }
 
                 await UniTask.Yield();
             }
