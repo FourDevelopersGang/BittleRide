@@ -39,7 +39,7 @@ namespace _src.Scripts.BugBehaviour
             if (IsPlayerBallWithinDistance(_attackDistance))
             {
                 _navMeshAgent.speed = 0f;
-                _bugMeleeAttackAction.PerformAttack();
+                _bugMeleeAttackAction.PerformAttack(MeleeAttackState.CreateDefault(_attackDistance));
                 return;
             }
 

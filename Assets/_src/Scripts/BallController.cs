@@ -4,15 +4,17 @@ using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider), typeof(Rigidbody))]
 public class BallController : MonoBehaviour
-{
+{    
     public float forceMagnitude = 500f;
     private Vector2 startTouchPosition;
     private Rigidbody rb;
+    private SphereCollider coll;
     private bool isDragging = false;
     [SerializeField, Required]
     private Camera _camera;
 
     public static BallController Instance { get; private set; }
+    public float Radius => coll.radius * transform.localScale.x;
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class BallController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        coll = GetComponent<SphereCollider>();
         _camera = Camera.main;
     }
 

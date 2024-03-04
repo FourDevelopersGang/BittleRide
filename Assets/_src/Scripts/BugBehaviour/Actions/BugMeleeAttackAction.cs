@@ -7,10 +7,10 @@ namespace _src.Scripts.BugBehaviour.Actions
 {
     public class BugMeleeAttackAction : MonoBehaviour
     {
-        [SerializeField] private float _damage;
         [SerializeField] private Animator _animator;
 
         private BugAttackEventListener _attackEventListener;
+        private MeleeAttackState _state;
         
         public bool IsAttacking { get; private set; }
 
@@ -28,15 +28,15 @@ namespace _src.Scripts.BugBehaviour.Actions
 
         private void OnEnable()
         {
-            _attackEventListener.Triggered += OnAttackTriggered;
+            _attackEventListener.Triggered += ExecuteAttackHit;
         }
 
         private void OnDisable()
         {
-            _attackEventListener.Triggered -= OnAttackTriggered;
+            _attackEventListener.Triggered -= ExecuteAttackHit;
         }
 
-        public void PerformAttack()
+        public void PerformAttack(MeleeAttackState state)
         {
             if (IsAttacking)
             {
@@ -44,17 +44,14 @@ namespace _src.Scripts.BugBehaviour.Actions
                 return;
             }
 
+            _state = state;
             Attack().Forget();
         }
 
-        private void OnAttackTriggered()
+        public void Deactivate()
         {
-            var nextStateInfo = _animator.GetNextAnimatorStateInfo(0);
-            var isTransitioning = nextStateInfo.fullPathHash != 0;
-            if (isTransitioning)
-                return;
-            
-            Debug.Log("Attack triggered");
+            _animator.ResetTrigger(AnimParams.Attack);
+            IsAttacking = false;
         }
 
         private async UniTask Attack()
@@ -74,10 +71,24 @@ namespace _src.Scripts.BugBehaviour.Actions
             IsAttacking = false;
         }
 
-        public void Deactivate()
+        private void ExecuteAttackHit()
         {
-            _animator.ResetTrigger(AnimParams.Attack);
-            IsAttacking = false;
+            var nextStateInfo = _animator.GetNextAnimatorStateInfo(0);
+            var isTransitioning = nextStateInfo.fullPathHash != 0;
+            if (isTransitioning)
+                return;
+            
+            var dirToTarget = _state.Target.transform.position - transform.position;
+            if (dirToTarget.sqrMagnitude > _state.AttackDistance * _state.AttackDistance)
+                return;
+
+            dirToTarget.y = 0;
+            var angleToTarget = Vector3.Angle(dirToTarget, transform.forward);
+            var maxAngleOffset = _state.AttackArcAngle / 2f;
+            if (angleToTarget > maxAngleOffset)
+                return;
+
+            Debug.Log("Apply damage");
         }
     }
 }
