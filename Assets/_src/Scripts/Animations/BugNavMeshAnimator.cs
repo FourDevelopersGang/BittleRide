@@ -13,7 +13,7 @@ namespace _src.Scripts.Animations
 
         private void OnEnable()
         {
-            _lastNormalizedSpeed = _animator.GetFloat(AnimParams.Speed);
+            _lastNormalizedSpeed = -1f;
             _bug.Deactivated += OnDeactivated;
         }
 
@@ -28,11 +28,11 @@ namespace _src.Scripts.Animations
             _animator.SetFloat(AnimParams.Speed, 0f);
         }
 
-        public void Update()
+        private void Update()
         {
             var maxSpeed = _navMeshAgent.speed;
             var speed = _navMeshAgent.velocity.magnitude;
-            var normalizedSpeed = speed / maxSpeed;
+            var normalizedSpeed = maxSpeed != 0f ? speed / maxSpeed : 0f;
             if (Mathf.Approximately(normalizedSpeed, _lastNormalizedSpeed))
                 return;
 
