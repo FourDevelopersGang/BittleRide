@@ -920,7 +920,7 @@ NavMeshAgent:
   m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: -0.35
@@ -944,7 +944,6 @@ MonoBehaviour:
   _boxCollider: {fileID: 1037597043506224951}
   _moveSpeed: 0.4
   _agroDistance: 1
-  _attackDistance: 0.2
 --- !u!114 &9132711248945855099
 MonoBehaviour:
   m_ObjectHideFlags: 0

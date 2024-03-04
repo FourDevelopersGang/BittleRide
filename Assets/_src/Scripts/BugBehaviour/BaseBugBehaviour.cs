@@ -41,8 +41,7 @@ namespace _src.Scripts.BugBehaviour
         {
             var target = BallController.Instance;
             var halfBody = selfCollider.bounds.extents.z;
-            var mandatoryDistance = halfBody + target.Radius;
-            var totalDistance = mandatoryDistance + halfBody;
+            var totalDistance = target.Radius + halfBody * 3;
             return totalDistance;
         }
     }

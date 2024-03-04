@@ -900,12 +900,11 @@ MonoBehaviour:
   _bugMeleeAttackAction: {fileID: 3253981488496205676}
   _navMeshAgent: {fileID: 3913953100229466862}
   _boxCollider: {fileID: 1037597043506224951}
-  _moveSpeed: 0.4
+  _moveSpeed: 0.13
   _maxWanderDistance: 0.8
   _minWaitAfterWanderTime: 1
   _maxWaitAfterWanderTime: 1.5
   _agroDistance: 0.5
-  _attackDistance: 0.2
 --- !u!114 &3253981488496205676
 MonoBehaviour:
   m_ObjectHideFlags: 0
