@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using _src.Scripts.Data;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,9 @@ namespace _src.Scripts
 {
 	public class LevelProgress : MonoBehaviour
 	{
+		[SerializeField, SceneObjectsOnly]
+		private SceneSavableDataProvider _sceneSavableDataProvider;
+		
 		[SerializeField]
 		private Slider _progressFill;
 
@@ -34,6 +38,7 @@ namespace _src.Scripts
 			{
 				// Обновление текущего уровня и сброс прогресса
 				_currentLevel = _playerProgression.CurrentLevel;
+				OnCompleteLevel(); // todo move to level complete when will be ready
 				_currentProgress = 1; // Поскольку событие увеличения уже произошло, начинаем отсчет с 1
 			}
 			_progressFill.value = CalculateFillAmount();
@@ -58,7 +63,12 @@ namespace _src.Scripts
 		}
 
 
-
+		private void OnCompleteLevel()
+		{
+			_sceneSavableDataProvider.CompletedLevelInfo.AddCompletedLevel(_currentLevel); // todo change _currenLevel on level id
+			_sceneSavableDataProvider.SaveLoadManager.SaveData();	
+			_sceneSavableDataProvider.SaveLoadManager.SubmitChanges();	
+		}
 
 
 		private void OnDestroy()
