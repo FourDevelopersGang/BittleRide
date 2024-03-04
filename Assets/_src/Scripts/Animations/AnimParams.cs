@@ -2,7 +2,7 @@
 {
     public static class AnimParams
     {
-        public const string Speed = "Move";
+        public const string Speed = "Speed";
         public const string Attack = "Attack";
     }
 }

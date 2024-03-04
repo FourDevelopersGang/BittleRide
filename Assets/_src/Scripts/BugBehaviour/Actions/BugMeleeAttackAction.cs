@@ -28,6 +28,11 @@ namespace _src.Scripts.BugBehaviour.Actions
             await UniTask.WaitForSeconds(2f);
         }
 
+        private void AttackHit()
+        {
+            Debug.Log("Animator attack event");
+        }
+
         public void Deactivate()
         {
             _animator.ResetTrigger(AnimParams.Attack);
