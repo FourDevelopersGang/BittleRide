@@ -65,6 +65,7 @@ MonoBehaviour:
   _duration: 10
   _boosterTimerUI: {fileID: 0}
   _transparency: 0.5
+  _ignoreCollisionWithEnemyLayer: IgnoreCollisionWithEnemy
 --- !u!1 &755969056634284609
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +270,7 @@ MonoBehaviour:
         RandomParticleSystems: []
         MoveToPosition: 0
         ActivateOnPlay: 0
-        StopSystemOnInit: 1
+        StopSystemOnInit: 0
         DeclaredDuration: 0
         ForceSimulationSpeed: 0
         ForcedSimulationSpeed: {x: 0.1, y: 1}

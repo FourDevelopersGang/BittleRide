@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2648689913346062414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2542540710922585157}
+  m_Layer: 0
+  m_Name: BugsContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2542540710922585157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2648689913346062414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7309702725942613836}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3696169956636537672
 GameObject:
   m_ObjectHideFlags: 0
@@ -14329,6 +14360,7 @@ GameObject:
   - component: {fileID: 7309702725942613879}
   - component: {fileID: 7309702725942613878}
   - component: {fileID: 8996999612135816312}
+  - component: {fileID: 3328303132482383808}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -14353,6 +14385,7 @@ Transform:
   - {fileID: 2309206588613457229}
   - {fileID: 7732675142921739279}
   - {fileID: 6576250543945880216}
+  - {fileID: 2542540710922585157}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14530,7 +14563,7 @@ MonoBehaviour:
   _minSize: 0.01
   _maxSize: 1
   _cinemachineVirtualCamera: {fileID: 0}
-  _centerOfSphereDelta: 2.5
+  _centerOfSphereDelta: 0.55
   _increaseSizeValue: 0.0025
   OnIncreaseSize:
     m_PersistentCalls:
@@ -14541,9 +14574,78 @@ MonoBehaviour:
   _smashedBugs: []
   _defeatSignal: {fileID: 2187932839726844507}
   _playerProgression: {fileID: 8996999612135816312}
-  _spheresRadius: 1
-  _spheresCount: 30
-  _randomPositions: []
+  _spheresRadius: 0.1
+  _spheresCount: 68.57
+  _randomPositions:
+  - {x: 0.0053112847, y: 0.000506134, z: 0.0013356956}
+  - {x: -0.004166278, y: -0.0034099775, z: 0.0011243597}
+  - {x: -0.0022730276, y: -0.004784277, z: 0.0014812298}
+  - {x: 0.0010995443, y: 0.0018146331, z: -0.0050742594}
+  - {x: 0.005135915, y: 0.0012800343, z: 0.0014946221}
+  - {x: 0.0021808585, y: 0.004878701, z: -0.001300819}
+  - {x: -0.0049394527, y: 0.0023916552, z: -0.000363032}
+  - {x: -0.0032233195, y: 0.00262046, z: -0.0036046358}
+  - {x: -0.0017328182, y: 0.005152447, z: 0.00083643966}
+  - {x: -0.0006867162, y: -0.0040531536, z: 0.003653815}
+  - {x: 0.0029319355, y: 0.0040507233, z: -0.002290283}
+  - {x: -0.002017511, y: -0.0043436056, z: 0.0027042078}
+  - {x: -0.003137907, y: 0.0025728846, z: 0.0037126543}
+  - {x: 0.0017940219, y: 0.0039130123, z: -0.0034234219}
+  - {x: -0.001491806, y: 0.0049177385, z: -0.0019596852}
+  - {x: 0.0028385234, y: 0.0046732477, z: 0.00059459225}
+  - {x: -0.000045507546, y: -0.0048940317, z: -0.00250926}
+  - {x: 0.0050619673, y: -0.0012661306, z: -0.0017387939}
+  - {x: -0.00008127276, y: 0.0054962276, z: 0.00018675762}
+  - {x: 0.0026257804, y: 0.004156189, z: -0.0024660435}
+  - {x: -0.003585803, y: 0.00401291, z: 0.0011351517}
+  - {x: -0.00032770514, y: 0.0049611432, z: 0.0023515252}
+  - {x: 0.0052554375, y: 0.0009888794, z: -0.0012854938}
+  - {x: -0.0030649996, y: 0.0019716239, z: 0.004119281}
+  - {x: -0.0031934818, y: -0.0030488884, z: 0.0032796273}
+  - {x: -0.0011797891, y: 0.001467643, z: -0.0051676035}
+  - {x: -0.0012671851, y: -0.0034686404, z: 0.0040758774}
+  - {x: 0.0005558175, y: -0.00486991, z: 0.002495004}
+  - {x: -0.0034124756, y: 0.0037910077, z: 0.002057492}
+  - {x: 0.0014412747, y: -0.004680955, z: -0.0025022759}
+  - {x: 0.00019178953, y: -0.0007336379, z: -0.0054474757}
+  - {x: 0.000894793, y: 0.00036550584, z: -0.0054144026}
+  - {x: -0.004859999, y: 0.0012356364, z: -0.0022591187}
+  - {x: 0.0011806639, y: 0.0009421943, z: 0.005288507}
+  - {x: 0.00015190706, y: -0.0034104823, z: -0.004312254}
+  - {x: -0.00029585755, y: -0.004647527, z: 0.0029262532}
+  - {x: -0.0037655134, y: 0.0031685322, z: -0.002455873}
+  - {x: -0.0023395456, y: -0.004782841, z: -0.0013787523}
+  - {x: 0.0047322437, y: -0.00017672309, z: -0.0027972555}
+  - {x: -0.004729354, y: 0.0028059748, z: -0.000098617136}
+  - {x: 0.0031310925, y: 0.0017065267, z: 0.0041873655}
+  - {x: -0.0042948946, y: 0.003222894, z: 0.0011903077}
+  - {x: 0.0024433539, y: -0.0029704329, z: -0.003931482}
+  - {x: -0.004683024, y: -0.0009055897, z: 0.0027384656}
+  - {x: -0.001677186, y: -0.0029458995, z: 0.0043311343}
+  - {x: -0.0002456681, y: -0.00548376, z: -0.00034354607}
+  - {x: -0.00400024, y: 0.0035260867, z: -0.0013471433}
+  - {x: 0.003955743, y: -0.0008933058, z: 0.0037153873}
+  - {x: -0.0015386327, y: -0.003267559, z: 0.0041479715}
+  - {x: -0.0014296876, y: 0.0018277187, z: -0.0049865255}
+  - {x: 0.0041035544, y: 0.00060809543, z: -0.003611241}
+  - {x: 0.002918615, y: 0.004652417, z: -0.00029445486}
+  - {x: 0.0024254844, y: 0.0047245203, z: 0.0014303604}
+  - {x: 0.0018172065, y: -0.001354637, z: -0.005011259}
+  - {x: -0.0015217662, y: 0.002613704, z: 0.004593776}
+  - {x: -0.002045574, y: -0.002567058, z: -0.004413144}
+  - {x: -0.0014412692, y: -0.00056490995, z: 0.005277653}
+  - {x: -0.0017841562, y: 0.0020527279, z: 0.0047804913}
+  - {x: 0.0033445915, y: 0.004209749, z: 0.0011583277}
+  - {x: -0.0026013479, y: -0.0011227257, z: -0.004714072}
+  - {x: -0.0016143372, y: -0.0033814088, z: 0.004026163}
+  - {x: -0.00016603149, y: 0.0019511798, z: 0.0051395847}
+  - {x: -0.0015476565, y: -0.00029960333, z: 0.0052692504}
+  - {x: 0.002001079, y: 0.0048953025, z: -0.0015105302}
+  - {x: 0.0054608006, y: -0.00048165108, z: -0.00044460423}
+  - {x: 0.0012593403, y: 0.0038014252, z: -0.0037700434}
+  - {x: 0.00035291206, y: -0.0049969787, z: -0.002270607}
+  - {x: 0.0042082854, y: 0.0017004, z: -0.0031062795}
+  - {x: -0.0024046893, y: 0.0044896672, z: -0.0020761394}
 --- !u!135 &7309702725942613878
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14574,7 +14676,21 @@ MonoBehaviour:
   currentLevel: 0
   levelUpRequirements:
     _keyData: 010000000200000003000000
-    _valueData: 050000001900000064000000
+    _valueData: 320000000a00000005000000
+--- !u!114 &3328303132482383808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7309702725942613832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14122912a0840a5ba6ca226f46e4f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainRenderer: {fileID: 8775689007551179125}
+  BugsContainer: {fileID: 2542540710922585157}
 --- !u!1001 &7309702726001592957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14722,11 +14838,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: WheelBall
       objectReference: {fileID: 0}
+    - target: {fileID: 687145877830984350, guid: 74cbada03bcd41d49acec56746acf71e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74cbada03bcd41d49acec56746acf71e, type: 3}
 --- !u!4 &2309206588613457229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 74cbada03bcd41d49acec56746acf71e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7309702727038295639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8775689007551179125 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7153751065107548382, guid: 74cbada03bcd41d49acec56746acf71e,
     type: 3}
   m_PrefabInstance: {fileID: 7309702727038295639}
   m_PrefabAsset: {fileID: 0}

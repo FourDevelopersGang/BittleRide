@@ -78,6 +78,9 @@ namespace _src.Scripts
 		private List<Vector3> _randomPositions = new();
 
 
+		private PlayerReferences _playerReferences;
+
+
 		public bool Invisible
 		{
 			get => _invisible;
@@ -91,6 +94,7 @@ namespace _src.Scripts
 		private void Start()
 		{
 			_rb = GetComponent<Rigidbody>();
+			_playerReferences = GetComponent<PlayerReferences>();
 		}
 
 
@@ -205,7 +209,7 @@ namespace _src.Scripts
 			// Определяем точку для размещения на сфере, учитывая текущий масштаб игрока
 
 			// Делаем объект дочерним и устанавливаем начальную позицию
-			bug.transform.parent = transform;
+			bug.transform.parent = _playerReferences.BugsContainer;
 			Vector3 inverseScale = Vector3.one / transform.localScale.x;
 			bug.transform.localScale = Vector3.zero;
 
