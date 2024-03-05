@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -15,16 +16,20 @@ namespace _src.Scripts.Common
 
 		private bool _used;
 
-		public void PickUp()
+		protected Transform _player;
+		protected void OnTriggerEnter(Collider other)
 		{
+			if (!other.CompareTag("Player"))
+				return;
+			
 			if (_used)
 				return;
 
+			_player = other.transform;
 			_used = true;
 			_pickUpFeedbacks.PlayFeedbacks();
 			OnPickUp();
 		}
-
 		protected void Reset()
 		{
 			_used = false;

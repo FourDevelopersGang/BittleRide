@@ -30,7 +30,7 @@ namespace _src.Scripts.GameEventsSystem
 		private int _countKillBugForComplete;
 
 		[BoxGroup("Event settings/Kill Bug For Time event"), SerializeField, Required]
-		private PlayerIncrease _playerIncrease;
+		private PlayerBugSmasher _playerBugSmasher;
 
 		[Title("Feedbacks")]
 		[SerializeField]
@@ -61,7 +61,7 @@ namespace _src.Scripts.GameEventsSystem
 		private void InitialEvents()
 		{
 			_gameEvents.Add(GameEventType.KillBugForTime,
-				new KillBugForTimeGameEvent(_durationEventKillBugForTime, _countKillBugForComplete, _playerIncrease)
+				new KillBugForTimeGameEvent(_durationEventKillBugForTime, _countKillBugForComplete, _playerBugSmasher)
 			);
 		}
 

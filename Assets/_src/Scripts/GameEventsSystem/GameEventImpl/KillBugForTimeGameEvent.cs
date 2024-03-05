@@ -12,7 +12,7 @@ namespace _src.Scripts.GameEventsSystem.GameEventImpl
 	{
 		private readonly float _durationEvent;
 		private readonly int _countKillForComplete;
-		private readonly PlayerIncrease _playerIncrease;
+		private readonly PlayerBugSmasher _playerBugSmasher;
 
 		private CancellationTokenSource _stopEventCancellationTokenSource;
 
@@ -23,11 +23,11 @@ namespace _src.Scripts.GameEventsSystem.GameEventImpl
 
 		public Timer Timer => _timer;
 
-		public KillBugForTimeGameEvent(float durationEvent, int countKillForComplete, PlayerIncrease playerIncrease)
+		public KillBugForTimeGameEvent(float durationEvent, int countKillForComplete, PlayerBugSmasher playerBugSmasher)
 		{
 			_durationEvent = durationEvent;
 			_countKillForComplete = countKillForComplete;
-			_playerIncrease = playerIncrease;
+			_playerBugSmasher = playerBugSmasher;
 		}
 
 		public override async UniTaskVoid Start(CancellationTokenSource stopCancellationTokenSource)
@@ -52,7 +52,7 @@ namespace _src.Scripts.GameEventsSystem.GameEventImpl
 			_counter = new Counter(_countKillForComplete);
 			_counter.ReachedTarget += OnKillRequiredBugs;
 			
-			_playerIncrease.OnKillBug.AddListener(OnKillBug);
+			_playerBugSmasher.OnKillBug.AddListener(OnKillBug);
 		}
 
 		private void OnKillBug()
@@ -65,7 +65,7 @@ namespace _src.Scripts.GameEventsSystem.GameEventImpl
 			_timer.OnCancelling -= OnFailedEvent;
 			_counter.ReachedTarget -= OnKillRequiredBugs;
 			
-			_playerIncrease.OnKillBug.RemoveListener(OnKillBug);
+			_playerBugSmasher.OnKillBug.RemoveListener(OnKillBug);
 		}
 
 		private void OnKillRequiredBugs()
