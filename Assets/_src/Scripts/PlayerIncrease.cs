@@ -123,7 +123,7 @@ namespace _src.Scripts
 		}
 
 
-		private void DecreaseSize()
+		public void DecreaseSize()
 		{
 			if (_physicalSize - _increaseSizeValue >= _minSize) // Уменьшаем размер, если не меньше минимума
 			{

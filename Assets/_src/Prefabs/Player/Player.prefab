@@ -14404,6 +14404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632bce4430a236543a213dbeae29119d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIncrease: {fileID: 7309702725942613879}
   forceMagnitude: 10
   _camera: {fileID: 0}
 --- !u!82 &7309702725942613872
@@ -14526,16 +14527,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d21448c727b43abb3085d658839e001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: 1
+  _level: 0
   _minSize: 0.01
   _maxSize: 1
   _cinemachineVirtualCamera: {fileID: 0}
   _centerOfSphereDelta: 2.5
   _increaseSizeValue: 0.0025
   OnIncreaseSize:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDecreaseSize:
     m_PersistentCalls:
       m_Calls: []
   _defeatSignal: {fileID: 0}

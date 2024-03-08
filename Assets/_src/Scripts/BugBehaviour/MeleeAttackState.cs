@@ -18,7 +18,7 @@ namespace _src.Scripts.BugBehaviour
                 AttackDistance = attackDistance,
                 Damage = 1,
                 Target = BallController.Instance,
-                AngularSpeed = 360f,
+                AngularSpeed = 140f,
             };
         }
     }

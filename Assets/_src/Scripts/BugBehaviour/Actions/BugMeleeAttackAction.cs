@@ -115,7 +115,7 @@ namespace _src.Scripts.BugBehaviour.Actions
             if (angleToTarget > maxAngleOffset)
                 return;
 
-            Debug.Log("Apply damage");
+            _state.Target.ApplyDamage(_state.Damage);
         }
     }
 }

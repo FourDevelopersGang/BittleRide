@@ -1,10 +1,11 @@
 using System;
+using _src.Scripts;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider), typeof(Rigidbody))]
+[RequireComponent(typeof(SphereCollider), typeof(Rigidbody), typeof(PlayerIncrease))]
 public class BallController : MonoBehaviour
-{    
+{
     public float forceMagnitude = 500f;
     private Vector2 startTouchPosition;
     private Rigidbody rb;
@@ -13,9 +14,16 @@ public class BallController : MonoBehaviour
     [SerializeField, Required]
     private Camera _camera;
 
+    private PlayerIncrease _playerIncrease;
+
     public static BallController Instance { get; private set; }
     public float Radius => coll.radius * transform.localScale.x;
 
+    public void ApplyDamage(float damage)
+    {
+        _playerIncrease.DecreaseSize();
+    }
+    
     private void Awake()
     {
         Instance = this;
@@ -25,6 +33,7 @@ public class BallController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<SphereCollider>();
+        _playerIncrease = GetComponent<PlayerIncrease>();
         _camera = Camera.main;
     }
 
