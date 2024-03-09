@@ -15,7 +15,11 @@ MonoBehaviour:
   Database:
     Items:
     - Category: InGame
+      Name: BoosterTimer
+    - Category: InGame
       Name: Defeat
+    - Category: InGame
+      Name: GameEvents
     - Category: InGame
       Name: InGameGUI
     - Category: InGame

@@ -1,5 +1,70 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8583431562971454790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c01f9a7d07f5c04a9f277379e94a10b, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  FlowGraphId: d26f0fe3-acd9-404c-b06a-08766bc065a1
+  NodeId: 3d72e9ca-036e-4e94-988b-fa2b17876b0f
+  NodeType: 0
+  NodeName: Event
+  NodeDescription: 
+  InputPorts:
+  - NodeId: 3d72e9ca-036e-4e94-988b-fa2b17876b0f
+    PortId: e52d53e4-4fc5-4ef0-ab29-bdb33244a354
+    Direction: 0
+    Capacity: 1
+    Connections:
+    - f82fda8b-4c19-4cbb-9a7d-ae37b374e612
+    Value: '{"CanGoBack":false}'
+    ValueTypeQualifiedName: Doozy.Runtime.UIManager.Nodes.PortData.GoBackInputPortData,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    CanBeDeleted: 0
+    CanBeReordered: 0
+  OutputPorts:
+  - NodeId: 3d72e9ca-036e-4e94-988b-fa2b17876b0f
+    PortId: 041304c1-9fb0-49ef-993c-27f7e5129c71
+    Direction: 1
+    Capacity: 0
+    Connections:
+    - cc5be36b-6422-4d58-9472-fe14b8b12c18
+    Value: '{"Trigger":1,"TimeDelay":3.0,"SignalPayload":{"StreamId":{"Category":"InGameSignals","Name":"EndGameEvent","Custom":false},"SignalValueType":0,"IntegerValue":0,"BooleanValue":false,"FloatValue":0.0,"StringValue":"","ColorValue":{"r":0.0,"g":0.0,"b":0.0,"a":0.0},"Vector2Value":{"x":0.0,"y":0.0},"Vector3Value":{"x":0.0,"y":0.0,"z":0.0},"Vector4Value":{"x":0.0,"y":0.0,"z":0.0,"w":0.0}},"ButtonId":{"Category":"None","Name":"None","Custom":false},"ToggleId":{"Category":"None","Name":"None","Custom":false},"CommandToggle":2,"ViewId":{"Category":"InGame","Name":"GameEvents","Custom":false},"CommandShowHide":1}'
+    ValueTypeQualifiedName: Doozy.Runtime.UIManager.Nodes.PortData.UIOutputPortData,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    CanBeDeleted: 0
+    CanBeReordered: 0
+  RunUpdate: 0
+  RunFixedUpdate: 0
+  RunLateUpdate: 0
+  NodeState: 0
+  CanBeDeleted: 1
+  Passthrough: 0
+  ClearGraphHistory: 0
+  Position: {x: 182.00002, y: -560}
+  OnEnterShowViews:
+  - Id:
+      Category: InGame
+      Name: GameEvents
+      Custom: 0
+    Mode: 0
+  OnEnterHideViews: []
+  OnExitShowViews: []
+  OnExitHideViews:
+  - Id:
+      Category: InGame
+      Name: GameEvents
+      Custom: 0
+    Mode: 0
+  OnEnterHideAllViews: 0
+  OnExitHideAllViews: 0
 --- !u!114 &-7736369064943061849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24,6 +89,8 @@ MonoBehaviour:
     Capacity: 1
     Connections:
     - cd81f41a-85a2-48bc-8cf9-eff6cb131d32
+    - 041304c1-9fb0-49ef-993c-27f7e5129c71
+    - 98ae3b11-dbed-4e4a-b774-ddb4d65f4584
     Value: '{"CanGoBack":false}'
     ValueTypeQualifiedName: Doozy.Runtime.UIManager.Nodes.PortData.GoBackInputPortData,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -70,7 +137,7 @@ MonoBehaviour:
   CanBeDeleted: 1
   Passthrough: 0
   ClearGraphHistory: 0
-  Position: {x: 185, y: -330.5}
+  Position: {x: 142.99995, y: -344.00003}
   OnEnterShowViews:
   - Id:
       Category: InGame
@@ -79,14 +146,75 @@ MonoBehaviour:
     Mode: 1
   OnEnterHideViews: []
   OnExitShowViews: []
-  OnExitHideViews:
-  - Id:
-      Category: InGame
-      Name: InGameGUI
-      Custom: 0
-    Mode: 0
+  OnExitHideViews: []
   OnEnterHideAllViews: 0
   OnExitHideAllViews: 0
+--- !u!114 &-5754730883133318303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2479a69f56cf54c96de81c44e8ad1a, type: 3}
+  m_Name: Portal
+  m_EditorClassIdentifier: 
+  FlowGraphId: d26f0fe3-acd9-404c-b06a-08766bc065a1
+  NodeId: c1e56d2c-d8a9-4031-86fd-2a94590951b7
+  NodeType: 1
+  NodeName: Portal
+  NodeDescription: 
+  InputPorts: []
+  OutputPorts:
+  - NodeId: c1e56d2c-d8a9-4031-86fd-2a94590951b7
+    PortId: c04783d8-6570-42d8-ba67-b0418d6237e2
+    Direction: 1
+    Capacity: 0
+    Connections:
+    - d87d18c5-417f-4d33-94a5-e334832948f8
+    Value: 
+    ValueTypeQualifiedName: 
+    CanBeDeleted: 0
+    CanBeReordered: 0
+  RunUpdate: 0
+  RunFixedUpdate: 0
+  RunLateUpdate: 0
+  NodeState: 0
+  CanBeDeleted: 1
+  Passthrough: 1
+  ClearGraphHistory: 0
+  Position: {x: -85.999985, y: -665.85016}
+  Trigger: 0
+  SignalPayload:
+    StreamId:
+      Category: InGameSignals
+      Name: StartBoosterTimer
+      Custom: 0
+    SignalValueType: 0
+    IntegerValue: 0
+    BooleanValue: 0
+    FloatValue: 0
+    StringValue: 
+    ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Vector2Value: {x: 0, y: 0}
+    Vector3Value: {x: 0, y: 0, z: 0}
+    Vector4Value: {x: 0, y: 0, z: 0, w: 0}
+  ButtonId:
+    Category: None
+    Name: None
+    Custom: 0
+  ToggleId:
+    Category: None
+    Name: None
+    Custom: 0
+  CommandToggle: 2
+  ViewId:
+    Category: None
+    Name: None
+    Custom: 0
+  CommandShowHide: 0
 --- !u!114 &-4977041381040537052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +285,72 @@ MonoBehaviour:
   OnExitHideViews: []
   OnEnterHideAllViews: 0
   OnExitHideAllViews: 0
+--- !u!114 &-4935755829239215426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2479a69f56cf54c96de81c44e8ad1a, type: 3}
+  m_Name: Portal
+  m_EditorClassIdentifier: 
+  FlowGraphId: d26f0fe3-acd9-404c-b06a-08766bc065a1
+  NodeId: 535bc917-3cb7-493e-99d2-8b481ccce1c9
+  NodeType: 1
+  NodeName: Portal
+  NodeDescription: 
+  InputPorts: []
+  OutputPorts:
+  - NodeId: 535bc917-3cb7-493e-99d2-8b481ccce1c9
+    PortId: f82fda8b-4c19-4cbb-9a7d-ae37b374e612
+    Direction: 1
+    Capacity: 0
+    Connections:
+    - e52d53e4-4fc5-4ef0-ab29-bdb33244a354
+    Value: 
+    ValueTypeQualifiedName: 
+    CanBeDeleted: 0
+    CanBeReordered: 0
+  RunUpdate: 0
+  RunFixedUpdate: 0
+  RunLateUpdate: 0
+  NodeState: 0
+  CanBeDeleted: 1
+  Passthrough: 1
+  ClearGraphHistory: 0
+  Position: {x: -85.999985, y: -560.0001}
+  Trigger: 0
+  SignalPayload:
+    StreamId:
+      Category: InGameSignals
+      Name: StartGameEvent
+      Custom: 0
+    SignalValueType: 0
+    IntegerValue: 0
+    BooleanValue: 0
+    FloatValue: 0
+    StringValue: 
+    ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Vector2Value: {x: 0, y: 0}
+    Vector3Value: {x: 0, y: 0, z: 0}
+    Vector4Value: {x: 0, y: 0, z: 0, w: 0}
+  ButtonId:
+    Category: None
+    Name: None
+    Custom: 0
+  ToggleId:
+    Category: None
+    Name: None
+    Custom: 0
+  CommandToggle: 2
+  ViewId:
+    Category: None
+    Name: None
+    Custom: 0
+  CommandShowHide: 0
 --- !u!114 &-3913886053495322081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +502,71 @@ MonoBehaviour:
     Category: None
     Name: None
     Custom: 0
+--- !u!114 &-450130425142394036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c01f9a7d07f5c04a9f277379e94a10b, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  FlowGraphId: d26f0fe3-acd9-404c-b06a-08766bc065a1
+  NodeId: 6e06d884-459c-47e1-b771-c004567f03a7
+  NodeType: 0
+  NodeName: BoosterTimer
+  NodeDescription: 
+  InputPorts:
+  - NodeId: 6e06d884-459c-47e1-b771-c004567f03a7
+    PortId: d87d18c5-417f-4d33-94a5-e334832948f8
+    Direction: 0
+    Capacity: 1
+    Connections:
+    - c04783d8-6570-42d8-ba67-b0418d6237e2
+    Value: '{"CanGoBack":false}'
+    ValueTypeQualifiedName: Doozy.Runtime.UIManager.Nodes.PortData.GoBackInputPortData,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    CanBeDeleted: 0
+    CanBeReordered: 0
+  OutputPorts:
+  - NodeId: 6e06d884-459c-47e1-b771-c004567f03a7
+    PortId: 98ae3b11-dbed-4e4a-b774-ddb4d65f4584
+    Direction: 1
+    Capacity: 0
+    Connections:
+    - cc5be36b-6422-4d58-9472-fe14b8b12c18
+    Value: '{"Trigger":1,"TimeDelay":3.0,"SignalPayload":{"StreamId":{"Category":"InGameSignals","Name":"EndBoosterTimer","Custom":false},"SignalValueType":0,"IntegerValue":0,"BooleanValue":false,"FloatValue":0.0,"StringValue":"","ColorValue":{"r":0.0,"g":0.0,"b":0.0,"a":0.0},"Vector2Value":{"x":0.0,"y":0.0},"Vector3Value":{"x":0.0,"y":0.0,"z":0.0},"Vector4Value":{"x":0.0,"y":0.0,"z":0.0,"w":0.0}},"ButtonId":{"Category":"None","Name":"None","Custom":false},"ToggleId":{"Category":"None","Name":"None","Custom":false},"CommandToggle":2,"ViewId":{"Category":"None","Name":"None","Custom":false},"CommandShowHide":0}'
+    ValueTypeQualifiedName: Doozy.Runtime.UIManager.Nodes.PortData.UIOutputPortData,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    CanBeDeleted: 0
+    CanBeReordered: 0
+  RunUpdate: 0
+  RunFixedUpdate: 0
+  RunLateUpdate: 0
+  NodeState: 0
+  CanBeDeleted: 1
+  Passthrough: 0
+  ClearGraphHistory: 0
+  Position: {x: 163.85004, y: -706.0002}
+  OnEnterShowViews:
+  - Id:
+      Category: InGame
+      Name: BoosterTimer
+      Custom: 0
+    Mode: 0
+  OnEnterHideViews: []
+  OnExitShowViews: []
+  OnExitHideViews:
+  - Id:
+      Category: InGame
+      Name: BoosterTimer
+      Custom: 0
+    Mode: 0
+  OnEnterHideAllViews: 0
+  OnExitHideAllViews: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02761efe598a45c98fa1baf4d446c6a7, type: 3}
   m_Name: InGameFlow
   m_EditorClassIdentifier: 
-  EditorPosition: {x: -341, y: 373, z: 0}
+  EditorPosition: {x: 426, y: 881, z: 0}
   EditorScale: {x: 1, y: 1, z: 1}
   Id: d26f0fe3-acd9-404c-b06a-08766bc065a1
   GraphName: Flow Graph
@@ -356,6 +615,10 @@ MonoBehaviour:
   - {fileID: 7280414654359324541}
   - {fileID: -3913886053495322081}
   - {fileID: 8442316229122655198}
+  - {fileID: -8583431562971454790}
+  - {fileID: -4935755829239215426}
+  - {fileID: -5754730883133318303}
+  - {fileID: -450130425142394036}
   RootNode: {fileID: -3248165160009347740}
   ActiveNode: {fileID: 0}
 --- !u!114 &2856232409369560224
@@ -434,7 +697,12 @@ MonoBehaviour:
       Name: Pause
       Custom: 0
     Mode: 0
-  OnEnterHideViews: []
+  OnEnterHideViews:
+  - Id:
+      Category: InGame
+      Name: InGameGUI
+      Custom: 0
+    Mode: 0
   OnExitShowViews: []
   OnExitHideViews:
   - Id:

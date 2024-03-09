@@ -15,7 +15,15 @@ MonoBehaviour:
   Database:
     Items:
     - Category: InGameSignals
+      Name: EndBoosterTimer
+    - Category: InGameSignals
+      Name: EndGameEvent
+    - Category: InGameSignals
       Name: Loose
+    - Category: InGameSignals
+      Name: StartBoosterTimer
+    - Category: InGameSignals
+      Name: StartGameEvent
     - Category: InGameSignals
       Name: Win
     - Category: None
