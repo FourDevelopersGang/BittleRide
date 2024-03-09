@@ -8,7 +8,7 @@ namespace _src.Scripts.BugBehaviour
 {
     public class WanderingBugBehaviour : BaseBugBehaviour
     {
-        [SerializeField] private BugMeleeAttackAction _bugMeleeAttackAction;
+        [SerializeField] private BugMeleeAttackAction _attackAction;
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private BoxCollider _boxCollider;
         [SerializeField] private float _moveSpeed = 4f;
@@ -16,6 +16,7 @@ namespace _src.Scripts.BugBehaviour
         [SerializeField] private float _minWaitAfterWanderTime = 1f;
         [SerializeField] private float _maxWaitAfterWanderTime = 1.5f;
         [SerializeField] private float _agroDistance = 5f;
+        [SerializeField] private float _attackCooldown = 1f;
 
         private Vector3 _wanderOrigin;
         private Timer _idleWaitTimer;
@@ -23,7 +24,7 @@ namespace _src.Scripts.BugBehaviour
         protected override void OnDeactivated()
         {
             _navMeshAgent.enabled = false;
-            _bugMeleeAttackAction.Deactivate();
+            _attackAction.Deactivate();
         }
 
         private void Start()
@@ -34,14 +35,15 @@ namespace _src.Scripts.BugBehaviour
 
         private void Update()
         {
-            if (!_navMeshAgent.isOnNavMesh || _navMeshAgent.pathPending || _bugMeleeAttackAction.IsAttacking)
+            if (!_navMeshAgent.isOnNavMesh || _navMeshAgent.pathPending || _attackAction.IsAttacking)
                 return;
 
             var attackDistance = CalculateAttackDistance(_boxCollider);
             if (IsPlayerBallWithinDistance(attackDistance))
             {
                 _navMeshAgent.speed = 0f;
-                _bugMeleeAttackAction.PerformAttack(MeleeAttackState.CreateDefault(attackDistance));
+                if (!_attackAction.IsCoolingDown)
+                    _attackAction.PerformAttack(MeleeAttackState.CreateDefault(attackDistance, _attackCooldown));
                 return;
             }
 

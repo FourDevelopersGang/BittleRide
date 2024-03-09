@@ -1,5 +1,6 @@
 ﻿using System;
 using _src.Scripts.Animations;
+using _src.Scripts.Utils;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -13,8 +14,10 @@ namespace _src.Scripts.BugBehaviour.Actions
         private MeleeAttackState _state;
         private bool _isWaitingForEvent;
         private bool _isAttacking;
+        private Timer _cooldownTimer;
 
         public bool IsAttacking => _isAttacking;
+        public bool IsCoolingDown => _cooldownTimer.IsActive && !_cooldownTimer.IsExpired();
 
         private void Awake()
         {
@@ -63,6 +66,17 @@ namespace _src.Scripts.BugBehaviour.Actions
         {
             _isAttacking = true;
             _isWaitingForEvent = true;
+            var timer = new Timer();
+            timer.Start(_state.StartDelay);
+            while (_isAttacking && !timer.IsExpired())
+            {
+                RotateTowardsTarget();
+                await UniTask.Yield();
+            }
+            
+            if (!_isAttacking)
+                return;
+            
             _animator.SetTrigger(AnimParams.Attack);
             
             while (_animator && _isAttacking)
@@ -81,6 +95,7 @@ namespace _src.Scripts.BugBehaviour.Actions
                 await UniTask.Yield();
             }
 
+            _cooldownTimer.Start(_state.Cooldown);
             _isAttacking = false;
             _isWaitingForEvent = false;
         }

@@ -16,6 +16,7 @@ namespace _src.Scripts.BugBehaviour
         [SerializeField] private float _minWaitAfterPatrolTime = 1f;
         [SerializeField] private float _maxWaitAfterPatrolTime = 1.5f;
         [SerializeField] private float _agroDistance = 5f;
+        [SerializeField] private float _attackCooldown = 1f;
 
         private Vector3 _patrolPositionA;
         private Vector3 _patrolPositionB;
@@ -46,7 +47,8 @@ namespace _src.Scripts.BugBehaviour
             if (IsPlayerBallWithinDistance(attackDistance))
             {
                 _navMeshAgent.speed = 0f;
-                _attackAction.PerformAttack(MeleeAttackState.CreateDefault(attackDistance));
+                if (!_attackAction.IsCoolingDown)
+                    _attackAction.PerformAttack(MeleeAttackState.CreateDefault(attackDistance, _attackCooldown));
                 return;
             }
 

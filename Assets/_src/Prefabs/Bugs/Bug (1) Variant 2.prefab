@@ -930,6 +930,7 @@ MonoBehaviour:
   _minWaitAfterPatrolTime: 1
   _maxWaitAfterPatrolTime: 1.5
   _agroDistance: 0.5
+  _attackCooldown: 1
 --- !u!195 &2399911961323972374
 NavMeshAgent:
   m_ObjectHideFlags: 0
