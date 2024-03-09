@@ -18,7 +18,7 @@ namespace _src.Scripts.BugBehaviour
         [SerializeField] private float _agroDistance = 5f;
 
         private Vector3 _wanderOrigin;
-        private float _idleWaitTimer;
+        private Timer _idleWaitTimer;
 
         protected override void OnDeactivated()
         {
@@ -52,10 +52,9 @@ namespace _src.Scripts.BugBehaviour
                 return;
             }
 
-            if (_idleWaitTimer > 0)
+            if (_idleWaitTimer.IsActive)
             {
-                _idleWaitTimer -= Time.deltaTime;
-                if (_idleWaitTimer > 0f)
+                if (!_idleWaitTimer.StopIfExpired())
                     return;
                 
                 _navMeshAgent.speed = _moveSpeed;
@@ -67,7 +66,7 @@ namespace _src.Scripts.BugBehaviour
             if (_navMeshAgent.remainingDistance < 0.15f)
             {
                 _navMeshAgent.speed = 0f;
-                _idleWaitTimer = Random.Range(_minWaitAfterWanderTime, _maxWaitAfterWanderTime);
+                _idleWaitTimer.Start(Random.Range(_minWaitAfterWanderTime, _maxWaitAfterWanderTime));
             }
         }
         

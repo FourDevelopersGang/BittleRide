@@ -65,7 +65,7 @@ namespace _src.Scripts.BugBehaviour.Actions
             _isWaitingForEvent = true;
             _animator.SetTrigger(AnimParams.Attack);
             
-            while (_animator && IsAttacking)
+            while (_animator && _isAttacking)
             {
                 if (_isWaitingForEvent)
                 {
@@ -115,7 +115,8 @@ namespace _src.Scripts.BugBehaviour.Actions
             if (angleToTarget > maxAngleOffset)
                 return;
 
-            _state.Target.ApplyDamage(_state.Damage);
+            if (_state.Target)
+                _state.Target.ApplyDamage(_state.Damage);
         }
     }
 }

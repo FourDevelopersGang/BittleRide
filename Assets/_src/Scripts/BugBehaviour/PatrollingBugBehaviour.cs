@@ -20,7 +20,7 @@ namespace _src.Scripts.BugBehaviour
         private Vector3 _patrolPositionA;
         private Vector3 _patrolPositionB;
         private bool _isGoingB;
-        private float _idleWaitTimer;
+        private Timer _idleWaitTimer;
 
         protected override void OnDeactivated()
         {
@@ -57,12 +57,12 @@ namespace _src.Scripts.BugBehaviour
                 return;
             }
 
-            if (_idleWaitTimer > 0)
+            if (_idleWaitTimer.IsActive)
             {
-                _idleWaitTimer -= Time.deltaTime;
-                if (_idleWaitTimer > 0f)
+                if (!_idleWaitTimer.StopIfExpired())
                     return;
-                
+
+                _idleWaitTimer.Stop();
                 SwitchDirection();
                 return;
             }
@@ -70,7 +70,7 @@ namespace _src.Scripts.BugBehaviour
             if (_navMeshAgent.remainingDistance < 0.15f)
             {
                 _navMeshAgent.speed = 0f;
-                _idleWaitTimer = Random.Range(_minWaitAfterPatrolTime, _maxWaitAfterPatrolTime);
+                _idleWaitTimer.Start(Random.Range(_minWaitAfterPatrolTime, _maxWaitAfterPatrolTime));
             }
         }
 
