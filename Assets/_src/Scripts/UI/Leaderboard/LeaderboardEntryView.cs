@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Core.Ui.Leaderboard
+namespace _src.Scripts.UI.Leaderboard
 {
     public class LeaderboardEntryView : MonoBehaviour
     {

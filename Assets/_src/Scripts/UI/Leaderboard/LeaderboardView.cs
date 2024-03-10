@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using _src.Scripts.SocialPlatform;
 using _src.Scripts.SocialPlatform.Leaderboards;
-using Core.Ui.Leaderboard;
 using Doozy.Runtime.UIManager.Containers;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _src.Scripts.UI.Leaderboard
 {
