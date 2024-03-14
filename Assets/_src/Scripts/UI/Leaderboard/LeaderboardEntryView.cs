@@ -9,12 +9,10 @@ namespace _src.Scripts.UI.Leaderboard
 {
     public class LeaderboardEntryView : MonoBehaviour
     {
-        [SerializeField] private RawImage _avatarImage;
         [SerializeField] private TextMeshProUGUI _rankText;
         [SerializeField] private TextMeshProUGUI _userNameText;
         [SerializeField] private TextMeshProUGUI _scoreValueText;
-        [SerializeField] private Texture2D _defaultAvatar;
-        //[SerializeField] private GameObject _showIfHighlighted;
+        [SerializeField] private GameObject _showIfHighlighted;
 
         private CancellationTokenSource _ctSource;
 
@@ -34,26 +32,17 @@ namespace _src.Scripts.UI.Leaderboard
             _ctSource?.Cancel();
         }
 
-        public void Init(Func<UniTask<Texture2D>> loadAvatar, int rank, string userName, long scoreValueText, bool isHighlighted)
+        public void Init(int rank, string userName, long scoreValueText, bool isHighlighted)
         {
-            _avatarImage.texture = _defaultAvatar;
             _rankText.SetText("{0}.", rank);
             _userNameText.SetText(userName);
             _scoreValueText.SetText("{0}", scoreValueText);
-            //_showIfHighlighted.SetActive(isHighlighted);
+            _showIfHighlighted.SetActive(isHighlighted);
 
             _ctSource?.Cancel();
             _ctSource = new CancellationTokenSource();
             var token = _ctSource.Token;
-            loadAvatar()
-                .ContinueWith(avatar =>
-                {
-                    if (token.IsCancellationRequested || _avatarImage == null)
-                        return;
-
-                    _avatarImage.texture = avatar ? avatar : _defaultAvatar;
-                })
-                .Forget();
+            // Load avatar
         }
     }
 }

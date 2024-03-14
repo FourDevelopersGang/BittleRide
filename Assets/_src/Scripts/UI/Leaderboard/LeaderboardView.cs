@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading;
-using _src.Scripts.SocialPlatform;
 using _src.Scripts.SocialPlatform.Leaderboards;
 using Doozy.Runtime.UIManager.Containers;
 using TMPro;
@@ -17,7 +16,7 @@ namespace _src.Scripts.UI.Leaderboard
         [SerializeField] private ScrollRect _scrollRect;
 
         private List<LeaderboardEntryView> _entryViews;
-        private LeaderboardService _leaderboardService;
+        private ILeaderboardService _leaderboardService;
         private CancellationTokenSource _ctSource;
 
         private void Start()
@@ -26,7 +25,7 @@ namespace _src.Scripts.UI.Leaderboard
                 _scrollRect.content.GetComponentsInChildren<LeaderboardEntryView>(true));
             SetAllEntryViewActive(false);
             SetLoading(false);
-            _leaderboardService = LeaderboardService.Instance;
+            _leaderboardService = LeaderboardProvider.Instance;
             _uiView.OnShowCallback.Event.AddListener(OnShown);
             _uiView.OnHiddenCallback.Event.AddListener(OnHidden);
         }
@@ -47,7 +46,7 @@ namespace _src.Scripts.UI.Leaderboard
             _ctSource?.Cancel();
             _ctSource = new CancellationTokenSource();
             var token = _ctSource.Token;
-            
+
             _leaderboardService.RetrieveData(response =>
             {
                 if (this == null || token.IsCancellationRequested)
@@ -74,62 +73,19 @@ namespace _src.Scripts.UI.Leaderboard
 
         private void DisplayEntries(RetrieveLeaderboardResponse response)
         {
-            var selfEntryOrNull = response.SelfEntry;
-            var isSelfValid = selfEntryOrNull.HasValue;
-            var selfEntryVal = selfEntryOrNull.GetValueOrDefault();
+            var rank = 1;
             
-            var indexOfSelf = isSelfValid 
-                ? response.Entries.FindIndex(e => e.UserId == selfEntryVal.UserId)
-                : -1;
-
-            long? selfScoreMaxValueOverride = null;
-            if (isSelfValid && indexOfSelf != -1)
-            {
-                selfScoreMaxValueOverride = (long) Mathf.Max(
-                    selfEntryVal.ScoreValue,
-                    response.Entries[indexOfSelf].ScoreValue);
-            }
-            
-            var shouldDisplaySelf = indexOfSelf == -1;
-            var displayCount = SocialPlatformService.LeaderboardCapacity;
-            if (shouldDisplaySelf)
-                displayCount--;
-            
-            for (var i = 0; i < response.Entries.Count && i < displayCount; i++)
+            for (var i = 0; i < response.Entries.Count; i++)
             {
                 var entry = response.Entries[i];
                 var entryView = SpawnEntryView();
-                var isSelf = i == indexOfSelf;
-                var scoreValue = entry.ScoreValue;
-                if (isSelf && selfScoreMaxValueOverride.HasValue)
-                    scoreValue = selfScoreMaxValueOverride.Value;
-
                 entryView.Init(
-                    entry.LoadAvatar,
-                    entry.Rank,
+                    rank++,
                     entry.UserName, 
-                    scoreValue, 
-                    isSelf);
+                    entry.ScoreValue, 
+                    entry.IsSelf);
             }
 
-            if (isSelfValid)
-            {
-                if (shouldDisplaySelf)
-                {
-                    var selfEntryView = SpawnEntryView();
-                    selfEntryView.Init(
-                        selfEntryVal.LoadAvatar,
-                        selfEntryVal.Rank,
-                        selfEntryVal.UserName,
-                        selfScoreMaxValueOverride ?? selfEntryVal.ScoreValue,
-                        true);
-                }
-            }
-            else
-            {
-                SetStatus("Unable to load");
-            }
-            
             _scrollRect.verticalNormalizedPosition = 0f;
         }
 
