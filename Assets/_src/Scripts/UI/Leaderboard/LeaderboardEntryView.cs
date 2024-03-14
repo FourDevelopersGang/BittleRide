@@ -14,7 +14,7 @@ namespace _src.Scripts.UI.Leaderboard
         [SerializeField] private TextMeshProUGUI _userNameText;
         [SerializeField] private TextMeshProUGUI _scoreValueText;
         [SerializeField] private Texture2D _defaultAvatar;
-        //[SerializeField] private GameObject _showIfHighlighted; TODO
+        //[SerializeField] private GameObject _showIfHighlighted;
 
         private CancellationTokenSource _ctSource;
 

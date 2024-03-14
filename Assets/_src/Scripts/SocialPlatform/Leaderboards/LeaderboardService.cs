@@ -11,13 +11,19 @@ namespace _src.Scripts.SocialPlatform.Leaderboards
 {
     public class LeaderboardService
     {
-        private static LeaderboardService _instance;
+        private static long? _cachedTotalScore;
+        private static readonly LeaderboardService _instance = new();
 
-        public static LeaderboardService Instance => _instance ??= new LeaderboardService();
-        
-        public void ReportScore(long score)
+        private LeaderboardService()
         {
-            ReportScoreAsync(score).Forget();
+        }
+
+
+        public static LeaderboardService Instance => _instance;
+
+        public void AddScore(int score)
+        {
+            AddScoreAsync(score).Forget();
         }
 
         public void RetrieveData(Action<RetrieveLeaderboardResponse> onResponse)
@@ -25,26 +31,49 @@ namespace _src.Scripts.SocialPlatform.Leaderboards
             RetrieveDataAsync(onResponse).Forget();
         }
 
-        private async UniTaskVoid ReportScoreAsync(long score)
+        private async UniTaskVoid AddScoreAsync(int scoreDelta)
         {
-            await SocialPlatformService.Instance.EnsureAuth();
-            Social.ReportScore(
-                score,
-                SocialPlatformService.Instance.GetLeaderboardId(),
-                isOk => Debug.Log($"[Leaderboard] Report score: val={score}, status={isOk}"));
+            if (_cachedTotalScore == null)
+            {
+                await SocialPlatformService.EnsureAuth();
+                var score = await SocialPlatformService.GetLocalUserScore();
+                if (score == null)
+                {
+                    Debug.LogWarning("[Leaderboard] Can't report score, local score is null");
+                    return;
+                }
+                
+                _cachedTotalScore = score;
+            }
+            
+            _cachedTotalScore += scoreDelta;
+            var newTotal = _cachedTotalScore.Value;
+            Social.ReportScore(newTotal, SocialPlatformService.GetLeaderboardId(), isOk =>
+            {
+                Debug.Log($"[Leaderboard] Report score: delta={scoreDelta}, newTotal={newTotal}, status={isOk}");
+            });
         }
 
         private async UniTaskVoid RetrieveDataAsync(Action<RetrieveLeaderboardResponse> onResponse)
         {
-            await SocialPlatformService.Instance.EnsureAuth();
-            var leaderboardId = SocialPlatformService.Instance.GetLeaderboardId();
+            await SocialPlatformService.EnsureAuth();
+            var leaderboardId = SocialPlatformService.GetLeaderboardId();
             Debug.Log($"[Leaderboard] Loading scores: {leaderboardId}");
-            SocialPlatformService.Instance.LoadScores((localScore, scores) =>
+            SocialPlatformService.LoadScores((localScore, scores) =>
             {
                 DebugLogAllLeaderboards();
                 Debug.Log($"[Leaderboard] Scores loaded successfully: {scores.Length}");
                 LoadEntries(scores, entries =>
                 {
+                    if (localScore == null)
+                    {
+                        Debug.LogWarning("[Leaderboard] Local score is null");
+                    }
+                    else
+                    {
+                        Debug.Log($"[Leaderboard] Local score: {ScoreToString(localScore)}");
+                    }
+                    
                     onResponse?.Invoke(new RetrieveLeaderboardResponse(
                         true,
                         CreateEntry(Social.localUser, localScore),
@@ -55,17 +84,22 @@ namespace _src.Scripts.SocialPlatform.Leaderboards
 
         private static void LoadEntries(IScore[] scores, Action<List<LeaderboardEntry>> onSuccess)
         {
-            var userIds = new List<string>();
-            foreach (var score in scores)
-            {
-                userIds.Add(score.userID);
-            }
-
             if (scores.Length == 0)
             {
                 Debug.Log("[Leaderboard] Ignoring users loading because scores empty, success");
                 onSuccess?.Invoke(new List<LeaderboardEntry>());
                 return;
+            }
+
+            var scoresStr = string.Join("\n", scores.Select(ScoreToString));
+            
+            Debug.Log($"[Leaderboard] Loaded scores: {scoresStr}");
+            
+            var userIds = new List<string>();
+            foreach (var score in scores.OrderBy(s => s.value))
+            {
+                if (!userIds.Contains(score.userID))
+                    userIds.Add(score.userID);
             }
             
             Debug.Log($"[Leaderboard] Loading users: {userIds.Count}");
@@ -84,18 +118,37 @@ namespace _src.Scripts.SocialPlatform.Leaderboards
                         continue;
                     }
 
-                    entries.Add(CreateEntry(user, score));
+                    var entry = CreateEntry(user, score);
+                    if (entry.HasValue)
+                        entries.Add(entry.Value);
                 }
 
                 onSuccess?.Invoke(entries);
             });
         }
 
-        private static LeaderboardEntry CreateEntry(IUserProfile user, IScore score)
+        private static string ScoreToString(IScore s)
         {
+            return $"userId={s.userID} rank={s.rank} value={s.value}";
+        }
+
+        private static LeaderboardEntry? CreateEntry(IUserProfile user, IScore score)
+        {
+            if (user == null && score == null)
+            {
+                Debug.LogWarning("[Leaderboard] CreateEntry failed, user and score is null");
+                return null;
+            }
+
+            if (score == null)
+            {
+                Debug.LogWarning("[Leaderboard] CreateEntry partially failed, score is null");
+                return new LeaderboardEntry(user.id, user.userName, -1, -1, () => SocialPlatformService.LoadImage(user));
+            }
+            
             var userId = user != null ? user.id : score.userID;
-            var userName = user != null ? user.userName : $"unknown_user_{score.userID}";
-            return new LeaderboardEntry(userId, userName, score.value, score.rank, () => SocialPlatformService.Instance.LoadImage(user));
+            var userName = user != null ? user.userName : $"**unknown_{score.userID}**";
+            return new LeaderboardEntry(userId, userName, score.value, score.rank, () => SocialPlatformService.LoadImage(user));
         }
 
         private void DebugLogAllLeaderboards()
@@ -103,10 +156,10 @@ namespace _src.Scripts.SocialPlatform.Leaderboards
             if (Social.Active is Local loc)
             {
                 var leadField = loc.GetType().GetField("m_Leaderboards", BindingFlags.Instance | BindingFlags.NonPublic);
-                var leaderboards = (List<Leaderboard>) leadField.GetValue(loc);
+                var leaderboards = (List<UnityEngine.SocialPlatforms.Impl.Leaderboard>) leadField.GetValue(loc);
                 foreach (var lb in leaderboards)
                 {
-                    Debug.Log($"Existing leaderboards: id={lb.id}, title={lb.title}");
+                    Debug.Log($"Debug leaderboard: id={lb.id}, title={lb.title}");
                 }
             }
         }

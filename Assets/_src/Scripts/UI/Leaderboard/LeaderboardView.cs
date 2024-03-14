@@ -3,29 +3,30 @@ using System.Threading;
 using _src.Scripts.SocialPlatform;
 using _src.Scripts.SocialPlatform.Leaderboards;
 using Doozy.Runtime.UIManager.Containers;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _src.Scripts.UI.Leaderboard
 {
     public class LeaderboardView : MonoBehaviour
     {
         [SerializeField] private UIView _uiView;
-        [SerializeField] private GameObject _showIfLoading;
+        [SerializeField] private TextMeshProUGUI _statusText;
         [SerializeField] private LeaderboardEntryView _entryViewPrefabPrefab;
-        [SerializeField] private RectTransform _contentParent;
+        [SerializeField] private ScrollRect _scrollRect;
 
         private List<LeaderboardEntryView> _entryViews;
-        private readonly LeaderboardService _leaderboardService = LeaderboardService.Instance;
+        private LeaderboardService _leaderboardService;
         private CancellationTokenSource _ctSource;
 
-        private static bool IsCheatRegistered;
-        
         private void Start()
         {
             _entryViews = new List<LeaderboardEntryView>(
-                _contentParent.GetComponentsInChildren<LeaderboardEntryView>(true));
+                _scrollRect.content.GetComponentsInChildren<LeaderboardEntryView>(true));
             SetAllEntryViewActive(false);
             SetLoading(false);
+            _leaderboardService = LeaderboardService.Instance;
             _uiView.OnShowCallback.Event.AddListener(OnShown);
             _uiView.OnHiddenCallback.Event.AddListener(OnHidden);
         }
@@ -38,7 +39,7 @@ namespace _src.Scripts.UI.Leaderboard
                 _uiView.OnHiddenCallback.Event.RemoveListener(OnHidden);
             }
         }
-
+        
         private void OnShown()
         {
             SetAllEntryViewActive(false);
@@ -70,10 +71,25 @@ namespace _src.Scripts.UI.Leaderboard
             SetLoading(false);
             SetAllEntryViewActive(false);
         }
-        
+
         private void DisplayEntries(RetrieveLeaderboardResponse response)
         {
-            var indexOfSelf = response.Entries.FindIndex(e => e.UserId == response.SelfEntry.UserId);
+            var selfEntryOrNull = response.SelfEntry;
+            var isSelfValid = selfEntryOrNull.HasValue;
+            var selfEntryVal = selfEntryOrNull.GetValueOrDefault();
+            
+            var indexOfSelf = isSelfValid 
+                ? response.Entries.FindIndex(e => e.UserId == selfEntryVal.UserId)
+                : -1;
+
+            long? selfScoreMaxValueOverride = null;
+            if (isSelfValid && indexOfSelf != -1)
+            {
+                selfScoreMaxValueOverride = (long) Mathf.Max(
+                    selfEntryVal.ScoreValue,
+                    response.Entries[indexOfSelf].ScoreValue);
+            }
+            
             var shouldDisplaySelf = indexOfSelf == -1;
             var displayCount = SocialPlatformService.LeaderboardCapacity;
             if (shouldDisplaySelf)
@@ -82,29 +98,42 @@ namespace _src.Scripts.UI.Leaderboard
             for (var i = 0; i < response.Entries.Count && i < displayCount; i++)
             {
                 var entry = response.Entries[i];
-                var entryView = GetEntryView();
+                var entryView = SpawnEntryView();
                 var isSelf = i == indexOfSelf;
+                var scoreValue = entry.ScoreValue;
+                if (isSelf && selfScoreMaxValueOverride.HasValue)
+                    scoreValue = selfScoreMaxValueOverride.Value;
+
                 entryView.Init(
                     entry.LoadAvatar,
                     entry.Rank,
                     entry.UserName, 
-                    entry.ScoreValue, 
+                    scoreValue, 
                     isSelf);
             }
-            
-            if (shouldDisplaySelf)
+
+            if (isSelfValid)
             {
-                var selfEntryView = GetEntryView();
-                selfEntryView.Init(
-                    response.SelfEntry.LoadAvatar,
-                    response.SelfEntry.Rank,
-                    response.SelfEntry.UserName,
-                    response.SelfEntry.ScoreValue,
-                    true);
+                if (shouldDisplaySelf)
+                {
+                    var selfEntryView = SpawnEntryView();
+                    selfEntryView.Init(
+                        selfEntryVal.LoadAvatar,
+                        selfEntryVal.Rank,
+                        selfEntryVal.UserName,
+                        selfScoreMaxValueOverride ?? selfEntryVal.ScoreValue,
+                        true);
+                }
             }
+            else
+            {
+                SetStatus("Unable to load");
+            }
+            
+            _scrollRect.verticalNormalizedPosition = 0f;
         }
 
-        private LeaderboardEntryView GetEntryView()
+        private LeaderboardEntryView SpawnEntryView()
         {
             foreach (var entryView in _entryViews)
             {
@@ -115,14 +144,26 @@ namespace _src.Scripts.UI.Leaderboard
                 return entryView;
             }
 
-            var newEntryView = Instantiate(_entryViewPrefabPrefab, _contentParent);
+            var newEntryView = Instantiate(_entryViewPrefabPrefab, _scrollRect.content);
             _entryViews.Add(newEntryView);
             return newEntryView;
         }
 
         private void SetLoading(bool isLoading)
         {
-            _showIfLoading.SetActive(isLoading);
+            if (isLoading)
+            {
+                SetStatus("Loading...");
+            }
+            else
+            {
+                SetStatus(string.Empty);
+            }
+        }
+
+        private void SetStatus(string message)
+        {
+            _statusText.text = message;
         }
 
         private void SetAllEntryViewActive(bool isActive)
