@@ -8,12 +8,15 @@ namespace _src.Scripts.SocialPlatform.Leaderboards
     public class FakeLeaderboardService : ILeaderboardService
     {
         private const string ScorePrefsKey = "local_high_score";
-        
-        public void AddScore(int scoreDelta)
+
+        public void TrySetNewHighScore(int newScore)
         {
-            var localScore = PlayerPrefs.GetInt(ScorePrefsKey, 0);
-            PlayerPrefs.SetInt(ScorePrefsKey, localScore + scoreDelta);
-            PlayerPrefs.Save();
+            var oldHighScore = PlayerPrefs.GetInt(ScorePrefsKey, 0);
+            if (newScore > oldHighScore)
+            {
+                PlayerPrefs.SetInt(ScorePrefsKey, newScore);
+                PlayerPrefs.Save();
+            }
         }
 
         public void RetrieveData(Action<RetrieveLeaderboardResponse> onResponse)
@@ -30,15 +33,15 @@ namespace _src.Scripts.SocialPlatform.Leaderboards
         {
             return new List<LeaderboardEntry>
             {
-                new ("Bob", 25),
-                new ("Mike", 57),
-                new ("Maria", 89),
-                new ("Lucas", 136),
-                new ("Lisa", 197),
-                new ("John", 276),
-                new ("Emma", 390),
-                new ("Christian", 456),
-                new ("Lily", 555),
+                new ("Bob23", 25),
+                new ("x_Mike_x", 57),
+                new ("99_Mar", 89),
+                new ("Lucas_Cool_Dude", 136),
+                new ("Lisa1337", 197),
+                new ("Master_JohhhN", 276),
+                new ("Emma_What_Son?", 390),
+                new ("PatrickBatemanOnTheLoose", 456),
+                new ("777_Lily_777", 555),
             };
         }
     }

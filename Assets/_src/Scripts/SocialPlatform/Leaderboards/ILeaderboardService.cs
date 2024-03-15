@@ -4,7 +4,7 @@ namespace _src.Scripts.SocialPlatform.Leaderboards
 {
     public interface ILeaderboardService
     {
-        void AddScore(int scoreDelta);
+        void TrySetNewHighScore(int newScore);
         void RetrieveData(Action<RetrieveLeaderboardResponse> onResponse);
     }
 }
