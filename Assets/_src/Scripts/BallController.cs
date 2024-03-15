@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using _src.Scripts;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -81,5 +82,10 @@ public class BallController : MonoBehaviour
             // Конец касания: останавливаем отслеживание
             isDragging = false;
         }
+    }
+
+    public int GetTotalScore()
+    {
+        return _playerBugSmasher.GetTotalScore();
     }
 }

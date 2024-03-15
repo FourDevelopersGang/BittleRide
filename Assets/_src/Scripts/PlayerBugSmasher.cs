@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _src.Scripts.SocialPlatform.Leaderboards;
 using Cinemachine;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -119,6 +120,7 @@ namespace _src.Scripts
 				else if (bug.Level > _playerProgression.CurrentLevel)
 				{
 					_defeatSignal.SendSignal();
+					LeaderboardProvider.Instance.TrySetNewHighScore(GetTotalScore());
 					Destroy(other.gameObject);
 				}
 			}
@@ -146,6 +148,7 @@ namespace _src.Scripts
 				else if (bug.Level > _playerProgression.CurrentLevel)
 				{
 					_defeatSignal.SendSignal();
+					LeaderboardProvider.Instance.TrySetNewHighScore(GetTotalScore());
 					Destroy(other.gameObject);
 				}
 			}
@@ -284,6 +287,11 @@ namespace _src.Scripts
 					);
 				}
 			}
+		}
+
+		public int GetTotalScore()
+		{
+			return _smashedBugs.Count;
 		}
 	}
 }

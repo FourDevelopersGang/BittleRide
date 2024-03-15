@@ -1,4 +1,5 @@
 ﻿using _src.Scripts.Data;
+using _src.Scripts.SocialPlatform.Leaderboards;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,6 +66,7 @@ namespace _src.Scripts
 
 		private void OnCompleteLevel()
 		{
+			LeaderboardProvider.Instance.TrySetNewHighScore(BallController.Instance.GetTotalScore());
 			_sceneSavableDataProvider.CompletedLevelInfo.AddCompletedLevel(_currentLevel); // todo change _currenLevel on level id
 			_sceneSavableDataProvider.SaveLoadManager.SaveData();	
 			_sceneSavableDataProvider.SaveLoadManager.SubmitChanges();	
