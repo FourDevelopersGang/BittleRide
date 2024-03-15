@@ -33,15 +33,15 @@ namespace _src.Scripts.SocialPlatform.Leaderboards
         {
             return new List<LeaderboardEntry>
             {
-                new ("Bob23", 25),
-                new ("x_Mike_x", 57),
-                new ("99_Mar", 89),
-                new ("CoolLucas13", 136),
-                new ("Lisa1337", 197),
-                new ("Master_JohhhN", 276),
-                new ("eEmmaStrikeR", 390),
-                new ("PatrickBateman", 456),
-                new ("77_Lily_77", 555),
+                new ("Bob23", 40),
+                new ("x_Mike_x", 89),
+                new ("99_Mar", 120),
+                new ("CoolLucas13", 190),
+                new ("Lisa1337", 245),
+                new ("Master_JohhhN", 321),
+                new ("eEmmaStrikeR", 445),
+                new ("PatrickBateman", 555),
+                new ("77_Lily_77", 623),
             };
         }
     }
