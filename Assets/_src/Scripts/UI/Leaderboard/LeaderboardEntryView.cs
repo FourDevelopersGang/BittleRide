@@ -12,7 +12,8 @@ namespace _src.Scripts.UI.Leaderboard
         [SerializeField] private TextMeshProUGUI _rankText;
         [SerializeField] private TextMeshProUGUI _userNameText;
         [SerializeField] private TextMeshProUGUI _scoreValueText;
-        [SerializeField] private GameObject _showIfHighlighted;
+        [SerializeField] private GameObject[] _showIfHighlighted;
+        [SerializeField] private GameObject[] _rankMedals;
 
         private CancellationTokenSource _ctSource;
 
@@ -37,7 +38,17 @@ namespace _src.Scripts.UI.Leaderboard
             _rankText.SetText("{0}.", rank);
             _userNameText.SetText(userName);
             _scoreValueText.SetText("{0}", scoreValueText);
-            _showIfHighlighted.SetActive(isHighlighted);
+
+            foreach (var showIf in _showIfHighlighted)
+            {
+                showIf.SetActive(isHighlighted);
+            }
+            
+            for (var i = 0; i < _rankMedals.Length; i++)
+            {
+                var medal = _rankMedals[i];
+                medal.SetActive(i == rank - 1);
+            }
 
             _ctSource?.Cancel();
             _ctSource = new CancellationTokenSource();

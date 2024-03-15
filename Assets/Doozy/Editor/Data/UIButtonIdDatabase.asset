@@ -17,6 +17,8 @@ MonoBehaviour:
     - Category: InGame
       Name: Continue
     - Category: InGame
+      Name: Leaderboard
+    - Category: InGame
       Name: NextLevel
     - Category: InGame
       Name: Pause

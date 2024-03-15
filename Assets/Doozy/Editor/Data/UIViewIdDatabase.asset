@@ -23,6 +23,8 @@ MonoBehaviour:
     - Category: InGame
       Name: InGameGUI
     - Category: InGame
+      Name: Leaderboard
+    - Category: InGame
       Name: Pause
     - Category: InGame
       Name: Win

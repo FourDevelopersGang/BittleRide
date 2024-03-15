@@ -266,6 +266,17 @@ MonoBehaviour:
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     CanBeDeleted: 1
     CanBeReordered: 1
+  - NodeId: 0597f769-52c8-4aac-8540-fee5771844b3
+    PortId: 2e9f073b-d948-4318-8625-8d4a84033879
+    Direction: 1
+    Capacity: 0
+    Connections:
+    - b8d717cf-5c49-4df5-b0c5-8ef0af8c9407
+    Value: '{"Trigger":2,"TimeDelay":3.0,"SignalPayload":{"StreamId":{"Category":"None","Name":"None","Custom":false},"SignalValueType":0,"IntegerValue":0,"BooleanValue":false,"FloatValue":0.0,"StringValue":"","ColorValue":{"r":0.0,"g":0.0,"b":0.0,"a":0.0},"Vector2Value":{"x":0.0,"y":0.0},"Vector3Value":{"x":0.0,"y":0.0,"z":0.0},"Vector4Value":{"x":0.0,"y":0.0,"z":0.0,"w":0.0}},"ButtonId":{"Category":"InGame","Name":"Leaderboard","Custom":false},"ToggleId":{"Category":"None","Name":"None","Custom":false},"CommandToggle":2,"ViewId":{"Category":"None","Name":"None","Custom":false},"CommandShowHide":0}'
+    ValueTypeQualifiedName: Doozy.Runtime.UIManager.Nodes.PortData.UIOutputPortData,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    CanBeDeleted: 1
+    CanBeReordered: 1
   RunUpdate: 0
   RunFixedUpdate: 0
   RunLateUpdate: 0
@@ -273,7 +284,7 @@ MonoBehaviour:
   CanBeDeleted: 1
   Passthrough: 0
   ClearGraphHistory: 0
-  Position: {x: 474, y: -102.99999}
+  Position: {x: 474.39996, y: -152.00002}
   OnEnterShowViews:
   - Id:
       Category: InGame
@@ -282,7 +293,12 @@ MonoBehaviour:
     Mode: 0
   OnEnterHideViews: []
   OnExitShowViews: []
-  OnExitHideViews: []
+  OnExitHideViews:
+  - Id:
+      Category: InGame
+      Name: Win
+      Custom: 0
+    Mode: 0
   OnEnterHideAllViews: 0
   OnExitHideAllViews: 0
 --- !u!114 &-4935755829239215426
@@ -502,6 +518,71 @@ MonoBehaviour:
     Category: None
     Name: None
     Custom: 0
+--- !u!114 &-2876480294571562980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c01f9a7d07f5c04a9f277379e94a10b, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  FlowGraphId: d26f0fe3-acd9-404c-b06a-08766bc065a1
+  NodeId: 368baccc-2a49-4f99-9be2-e5d808a69481
+  NodeType: 0
+  NodeName: Leaderboard
+  NodeDescription: 
+  InputPorts:
+  - NodeId: 368baccc-2a49-4f99-9be2-e5d808a69481
+    PortId: b8d717cf-5c49-4df5-b0c5-8ef0af8c9407
+    Direction: 0
+    Capacity: 1
+    Connections:
+    - 2e9f073b-d948-4318-8625-8d4a84033879
+    - 203449ca-738c-4380-b040-b7639eb62862
+    Value: '{"CanGoBack":true}'
+    ValueTypeQualifiedName: Doozy.Runtime.UIManager.Nodes.PortData.GoBackInputPortData,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    CanBeDeleted: 0
+    CanBeReordered: 0
+  OutputPorts:
+  - NodeId: 368baccc-2a49-4f99-9be2-e5d808a69481
+    PortId: 5e884baf-e6ca-4747-a30f-d0d0757b2e49
+    Direction: 1
+    Capacity: 0
+    Connections: []
+    Value: '{"Trigger":2,"TimeDelay":3.0,"SignalPayload":{"StreamId":{"Category":"InGameSignals","Name":"None","Custom":false},"SignalValueType":0,"IntegerValue":0,"BooleanValue":false,"FloatValue":0.0,"StringValue":"","ColorValue":{"r":0.0,"g":0.0,"b":0.0,"a":0.0},"Vector2Value":{"x":0.0,"y":0.0},"Vector3Value":{"x":0.0,"y":0.0,"z":0.0},"Vector4Value":{"x":0.0,"y":0.0,"z":0.0,"w":0.0}},"ButtonId":{"Category":"MainMenu","Name":"Return","Custom":false},"ToggleId":{"Category":"None","Name":"None","Custom":false},"CommandToggle":2,"ViewId":{"Category":"MainMenu","Name":"None","Custom":false},"CommandShowHide":0}'
+    ValueTypeQualifiedName: Doozy.Runtime.UIManager.Nodes.PortData.UIOutputPortData,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    CanBeDeleted: 0
+    CanBeReordered: 0
+  RunUpdate: 0
+  RunFixedUpdate: 0
+  RunLateUpdate: 0
+  NodeState: 0
+  CanBeDeleted: 1
+  Passthrough: 0
+  ClearGraphHistory: 0
+  Position: {x: 810.222, y: -203.59996}
+  OnEnterShowViews:
+  - Id:
+      Category: InGame
+      Name: Leaderboard
+      Custom: 0
+    Mode: 0
+  OnEnterHideViews: []
+  OnExitShowViews: []
+  OnExitHideViews:
+  - Id:
+      Category: InGame
+      Name: Leaderboard
+      Custom: 0
+    Mode: 0
+  OnEnterHideAllViews: 0
+  OnExitHideAllViews: 0
 --- !u!114 &-450130425142394036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -579,7 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02761efe598a45c98fa1baf4d446c6a7, type: 3}
   m_Name: InGameFlow
   m_EditorClassIdentifier: 
-  EditorPosition: {x: 426, y: 881, z: 0}
+  EditorPosition: {x: -337.6, y: 380, z: 0}
   EditorScale: {x: 1, y: 1, z: 1}
   Id: d26f0fe3-acd9-404c-b06a-08766bc065a1
   GraphName: Flow Graph
@@ -619,6 +700,7 @@ MonoBehaviour:
   - {fileID: -4935755829239215426}
   - {fileID: -5754730883133318303}
   - {fileID: -450130425142394036}
+  - {fileID: -2876480294571562980}
   RootNode: {fileID: -3248165160009347740}
   ActiveNode: {fileID: 0}
 --- !u!114 &2856232409369560224
@@ -753,6 +835,17 @@ MonoBehaviour:
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     CanBeDeleted: 0
     CanBeReordered: 0
+  - NodeId: 12f479ac-84de-4d97-b045-ebaeede006d2
+    PortId: 203449ca-738c-4380-b040-b7639eb62862
+    Direction: 1
+    Capacity: 0
+    Connections:
+    - b8d717cf-5c49-4df5-b0c5-8ef0af8c9407
+    Value: '{"Trigger":2,"TimeDelay":3.0,"SignalPayload":{"StreamId":{"Category":"None","Name":"None","Custom":false},"SignalValueType":0,"IntegerValue":0,"BooleanValue":false,"FloatValue":0.0,"StringValue":"","ColorValue":{"r":0.0,"g":0.0,"b":0.0,"a":0.0},"Vector2Value":{"x":0.0,"y":0.0},"Vector3Value":{"x":0.0,"y":0.0,"z":0.0},"Vector4Value":{"x":0.0,"y":0.0,"z":0.0,"w":0.0}},"ButtonId":{"Category":"InGame","Name":"Leaderboard","Custom":false},"ToggleId":{"Category":"None","Name":"None","Custom":false},"CommandToggle":2,"ViewId":{"Category":"None","Name":"None","Custom":false},"CommandShowHide":0}'
+    ValueTypeQualifiedName: Doozy.Runtime.UIManager.Nodes.PortData.UIOutputPortData,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    CanBeDeleted: 1
+    CanBeReordered: 1
   RunUpdate: 0
   RunFixedUpdate: 0
   RunLateUpdate: 0
@@ -769,7 +862,12 @@ MonoBehaviour:
     Mode: 0
   OnEnterHideViews: []
   OnExitShowViews: []
-  OnExitHideViews: []
+  OnExitHideViews:
+  - Id:
+      Category: InGame
+      Name: Defeat
+      Custom: 0
+    Mode: 0
   OnEnterHideAllViews: 0
   OnExitHideAllViews: 0
 --- !u!114 &5654691297507973757

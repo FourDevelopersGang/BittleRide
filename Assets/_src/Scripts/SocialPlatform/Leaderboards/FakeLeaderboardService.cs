@@ -22,7 +22,7 @@ namespace _src.Scripts.SocialPlatform.Leaderboards
         public void RetrieveData(Action<RetrieveLeaderboardResponse> onResponse)
         {
             var localScore = PlayerPrefs.GetInt(ScorePrefsKey, 0);
-            var selfEntry = new LeaderboardEntry("User", localScore, isSelf: true);
+            var selfEntry = new LeaderboardEntry("Player", localScore, isSelf: true);
             var fakeEntries = GenerateFakeEntries();
             fakeEntries.Add(selfEntry);
             fakeEntries = fakeEntries.OrderByDescending(e => e.ScoreValue).ToList();
@@ -36,12 +36,12 @@ namespace _src.Scripts.SocialPlatform.Leaderboards
                 new ("Bob23", 25),
                 new ("x_Mike_x", 57),
                 new ("99_Mar", 89),
-                new ("Lucas_Cool_Dude", 136),
+                new ("CoolLucas13", 136),
                 new ("Lisa1337", 197),
                 new ("Master_JohhhN", 276),
-                new ("Emma_What_Son?", 390),
-                new ("PatrickBatemanOnTheLoose", 456),
-                new ("777_Lily_777", 555),
+                new ("eEmmaStrikeR", 390),
+                new ("PatrickBateman", 456),
+                new ("77_Lily_77", 555),
             };
         }
     }

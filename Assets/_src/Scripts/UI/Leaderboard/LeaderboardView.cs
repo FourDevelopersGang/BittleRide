@@ -26,6 +26,7 @@ namespace _src.Scripts.UI.Leaderboard
             SetAllEntryViewActive(false);
             SetLoading(false);
             _leaderboardService = LeaderboardProvider.Instance;
+            _uiView.Hide();
             _uiView.OnShowCallback.Event.AddListener(OnShown);
             _uiView.OnHiddenCallback.Event.AddListener(OnHidden);
         }
