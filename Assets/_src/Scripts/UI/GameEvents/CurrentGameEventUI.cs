@@ -7,12 +7,18 @@ using Doozy.Runtime.Signals;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
+using UnityEngine.Serialization;
 
 
 namespace _src.Scripts.UI.GameEvents
 {
 	public class CurrentGameEventUI : MonoBehaviour
 	{
+		private const string GameEventLocalizationKeyPrefix = "name_";
+		
 		[Title("Signal Start Game Event")]
 		[SerializeField]
 		private StreamId _signalStartGameEventId;
@@ -25,7 +31,11 @@ namespace _src.Scripts.UI.GameEvents
 		
 		[SerializeField, ChildGameObjectsOnly, Required]
 		private CountdownTimerUI _countdownTimerUI;
-		
+
+		[Title("Localization")]
+		[SerializeField]
+		private LocalizedStringTable  _eventLocalizationTable;
+
 		private SignalReceiver _signalStartGameEventsReceiver;
 
 		private void Awake()
@@ -71,13 +81,8 @@ namespace _src.Scripts.UI.GameEvents
 			}
 		}
 
-		private string GetNameEventByType(GameEventType gameEventType)
-		{
-			return gameEventType switch
-			{
-				GameEventType.KillBugForTime => "Kill Bugs",
-				_ => throw new ArgumentOutOfRangeException(nameof(gameEventType), gameEventType, null)
-			};
-		}
+		private string GetNameEventByType(GameEventType gameEventType) => 
+			LocalizationSettings.StringDatabase.GetLocalizedString(_eventLocalizationTable.TableReference, 
+				GameEventLocalizationKeyPrefix + gameEventType);
 	}
 }

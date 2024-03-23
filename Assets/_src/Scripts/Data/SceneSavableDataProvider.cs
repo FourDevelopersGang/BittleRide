@@ -30,6 +30,14 @@ namespace _src.Scripts.Data
 		[SerializeField, ShowIf(nameof(_feedbackSettingsRequiredForScene)), ReadOnly]
 		private FeedbackSettings _feedbackSettings;
 
+		[BoxGroup("Savable Data Requirement/Local")]
+		[SerializeField]
+		private bool _localAppRequiredForScene;
+
+		[BoxGroup("Savable Data Requirement/Local")]
+		[SerializeField, ShowIf(nameof(_localAppRequiredForScene)), ReadOnly]
+		private LocalApp _localApp;
+		
 		public SaveLoadManager SaveLoadManager { get; private set; }
 
 		public CompletedLevelInfo CompletedLevelInfo
@@ -60,6 +68,20 @@ namespace _src.Scripts.Data
 			private set => _feedbackSettings = value;
 		}
 
+		public LocalApp LocalApp
+		{
+			get
+			{
+				if (!_localAppRequiredForScene)
+				{
+					Debug.LogError($"{nameof(LocalApp)} not init in this scene", this);
+				}
+				return _localApp;
+			}
+
+			private set => _localApp = value;
+		}
+
 		private void Awake()
 		{
 			Init();
@@ -81,6 +103,12 @@ namespace _src.Scripts.Data
 			{
 				CompletedLevelInfo = new CompletedLevelInfo();
 				loaderAndSavers.Add(new SavableDataLoaderSaver<CompletedLevelInfo>(serializedDataHolder, CompletedLevelInfo));
+			}
+			
+			if (_localAppRequiredForScene)
+			{
+				LocalApp = new LocalApp();
+				loaderAndSavers.Add(new SavableDataLoaderSaver<LocalApp>(serializedDataHolder, LocalApp));
 			}
 
 			SaveLoadManager = new SaveLoadManager(serializedDataHolder, loaderAndSavers);

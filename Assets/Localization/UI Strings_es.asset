@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI Strings_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 563516f4536893e49b6e884004a7e6b6, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 15363428352
+    m_Localized: Jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 116970442752
+    m_Localized: Ajustes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 227565850624
+    m_Localized: Salida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1969317695488
+    m_Localized: Sonido FX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1999894171648
+    m_Localized: "M\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2030529368064
+    m_Localized: "Vibraci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2286264471552
+    m_Localized: "\xA1\xA1\xA1Terminado!!!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 364961804800000
+    m_Localized: pausa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 367161121656832
+    m_Localized: continuar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 368077560303616
+    m_Localized: reiniciar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 368474370822144
+    m_Localized: renunciar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 370959290421248
+    m_Localized: "\xA1escenario despejado!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372293695655936
+    m_Localized: recompensas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373445757718528
+    m_Localized: siguiente nivel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 374707689574400
+    m_Localized: "x2 Reclamaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 376758767144960
+    m_Localized: "Clasificaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
