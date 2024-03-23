@@ -79,6 +79,10 @@ MonoBehaviour:
     m_Key: ranking
     m_Metadata:
       m_Items: []
+  - m_Id: 551639307735040
+    m_Key: defeat
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

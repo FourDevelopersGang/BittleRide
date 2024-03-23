@@ -82,6 +82,10 @@ MonoBehaviour:
     m_Localized: Ranking
     m_Metadata:
       m_Items: []
+  - m_Id: 551639307735040
+    m_Localized: Defeat
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

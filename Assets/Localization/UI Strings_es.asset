@@ -82,6 +82,10 @@ MonoBehaviour:
     m_Localized: "Clasificaci\xF3n"
     m_Metadata:
       m_Items: []
+  - m_Id: 551639307735040
+    m_Localized: Derrota
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
