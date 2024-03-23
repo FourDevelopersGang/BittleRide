@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace _src.Scripts.Boosters
 {
-	[RequireComponent(typeof(SphereCollider), typeof(Pickupable))]
+	[RequireComponent(typeof(SphereCollider))]
 	public abstract class Booster : Pickupable, IHasTimer
 	{
 		private Collider _collider;
@@ -34,6 +34,7 @@ namespace _src.Scripts.Boosters
 			_timer = new Timer(_duration);
 			_boosterTimerUI.StartUITimer(_timer);
 			PlayTimerTickInUpdate().Forget();
+			Behaviour();
 		}
 		public Timer Timer => _timer;
 
@@ -48,6 +49,9 @@ namespace _src.Scripts.Boosters
 			}
 		}
 
+
+		protected abstract UniTask Behaviour();
+	
 
 		protected void StopTimer()
 		{

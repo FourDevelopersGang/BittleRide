@@ -26,7 +26,7 @@ namespace _src.Scripts.Boosters
 		private string _cachedLayer;
 
 
-		private async UniTask Behaviour()
+		protected override async UniTask Behaviour()
 		{
 			if (_player)
 			{
@@ -136,13 +136,7 @@ namespace _src.Scripts.Boosters
 				1.0f
 			);
 		}
-
-
-		protected override void OnPickUp()
-		{
-			base.OnPickUp();
-			Behaviour().Forget();
-		}
+		
 
 
 		private static IEnumerable GetAllLayers()

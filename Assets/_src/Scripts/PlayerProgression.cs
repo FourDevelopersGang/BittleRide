@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class PlayerProgression : MonoBehaviour
 {
-	[SerializeField]
+	[SerializeField , Required]
 	private PlayerBugSmasher _playerBugSmasher; // Ссылка на скрипт PlayerIncrease
 
 

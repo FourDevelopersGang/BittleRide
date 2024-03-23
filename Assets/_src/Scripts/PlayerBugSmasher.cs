@@ -289,6 +289,7 @@ namespace _src.Scripts
 			}
 		}
 
+
 		public int GetTotalScore()
 		{
 			return _smashedBugs.Count;

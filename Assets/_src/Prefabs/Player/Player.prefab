@@ -14671,7 +14671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9b69d29aff4ad580c2e55dfde0e234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerBugSmasher: {fileID: 0}
+  _playerBugSmasher: {fileID: 7309702725942613879}
   bugsSmashed: 0
   currentLevel: 0
   levelUpRequirements:

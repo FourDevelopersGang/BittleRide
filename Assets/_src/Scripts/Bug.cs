@@ -29,6 +29,9 @@ namespace _src.Scripts
 
 		public event Action Deactivated;
 
+
+		public bool isSmashed;
+
 		private void Start()
 		{
 			_collider = GetComponent<Collider>();
@@ -39,6 +42,7 @@ namespace _src.Scripts
 
 		public void Deactivate()
 		{
+			isSmashed = true;
 			_collider.enabled = false;
 			_destroyFeedbacks.PlayFeedbacks();
 			Destroy(_rb);

@@ -125,7 +125,7 @@ namespace _src.Scripts.GameEventsSystem
 		{
 			if (!_gameEvents.ContainsKey(gameEventType))
 			{
-				Debug.LogWarning($"Try start event ({gameEventType.DisplayName()}) that not init in system");
+				Debug.LogWarning($"Try start event ({gameEventType.ToString()}) that not init in system");
 
 				return false;
 			}
