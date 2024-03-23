@@ -45,6 +45,8 @@ namespace _src.Scripts.UI
 			}
 		}
 
-		private bool CheckLevelCompleted(int levelId) => _sceneSavableDataProvider.CompletedLevelInfo.CompletedLevels.Contains(levelId);
+		private bool CheckLevelCompleted(int levelId) => 
+			_sceneSavableDataProvider.CompletedLevelInfo.CompletedLevels is {Count: > 0} && 
+			_sceneSavableDataProvider.CompletedLevelInfo.CompletedLevels.Contains(levelId);
 	}
 }
