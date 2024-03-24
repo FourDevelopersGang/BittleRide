@@ -86,6 +86,10 @@ MonoBehaviour:
     m_Localized: Defeat
     m_Metadata:
       m_Items: []
+  - m_Id: 594266530992128
+    m_Localized: Choose ball
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

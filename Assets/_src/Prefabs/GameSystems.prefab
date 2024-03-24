@@ -1052,6 +1052,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d083d2a381d34eab987288a7ba44a829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameDataRequiredForScene: 1
+  _gameData:
+    _skin: 0
   _completeLevelInfoRequiredForScene: 1
   _completedLevelInfo:
     _completedLevels: 
@@ -1060,6 +1063,9 @@ MonoBehaviour:
     _musicVolume: 0
     _sfxVolume: 0
     _vibrate: 0
+  _localAppRequiredForScene: 0
+  _localApp:
+    _localId: 
 --- !u!1 &8859372744357462650
 GameObject:
   m_ObjectHideFlags: 0

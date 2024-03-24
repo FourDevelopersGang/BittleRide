@@ -30,9 +30,11 @@ namespace Doozy.Runtime.UIManager
     {
         public enum InGame
         {
+            BoosterTimer,
             Defeat,
             GameEvents,
             InGameGUI,
+            Leaderboard,
             Pause,
             Win
         }
@@ -40,6 +42,7 @@ namespace Doozy.Runtime.UIManager
         public enum MainMenu
         {
             MainMenu,
+            SelectBall,
             SelectLevel,
             Settings
         }    

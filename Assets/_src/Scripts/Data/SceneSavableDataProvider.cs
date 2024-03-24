@@ -13,8 +13,17 @@ namespace _src.Scripts.Data
 	[DefaultExecutionOrder(-1)]
 	public class SceneSavableDataProvider : MonoBehaviour
 	{
-	    [TitleGroup("Savable Data Requirement")]
-		[BoxGroup("Savable Data Requirement/Complete Level Info")]
+		[TitleGroup("Savable Data Requirement")]
+
+		[BoxGroup("Savable Data Requirement/Game Data")]
+		[SerializeField]
+		public bool _gameDataRequiredForScene;
+		
+		[BoxGroup("Savable Data Requirement/Game Data")]
+		[SerializeField, ShowIf(nameof(_gameDataRequiredForScene)), ReadOnly]
+		private GameData _gameData;
+	    
+	    [BoxGroup("Savable Data Requirement/Complete Level Info")]
 		[SerializeField]
 		private bool _completeLevelInfoRequiredForScene;
 
@@ -40,6 +49,18 @@ namespace _src.Scripts.Data
 		
 		public SaveLoadManager SaveLoadManager { get; private set; }
 
+		public GameData GameData
+		{
+			get
+			{
+				if (!_gameDataRequiredForScene)
+				{
+					Debug.LogError($"{nameof(GameData)} not init in this scene", this);
+				}
+				return _gameData;
+			}
+		}
+		
 		public CompletedLevelInfo CompletedLevelInfo
 		{
 			get
@@ -50,8 +71,6 @@ namespace _src.Scripts.Data
 				}
 				return _completedLevelInfo;
 			}
-
-			private set => _completedLevelInfo = value;
 		}
 
 		public FeedbackSettings FeedbackSettings
@@ -64,8 +83,6 @@ namespace _src.Scripts.Data
 				}
 				return _feedbackSettings;
 			}
-
-			private set => _feedbackSettings = value;
 		}
 
 		public LocalApp LocalApp
@@ -78,8 +95,6 @@ namespace _src.Scripts.Data
 				}
 				return _localApp;
 			}
-
-			private set => _localApp = value;
 		}
 
 		private void Awake()
@@ -93,22 +108,28 @@ namespace _src.Scripts.Data
 
 			var loaderAndSavers = new List<ILoaderSaverData>();
 
+			if (_gameDataRequiredForScene)
+			{
+				_gameData = new GameData();
+				loaderAndSavers.Add(new SavableDataLoaderSaver<GameData>(serializedDataHolder, _gameData));
+			}
+			
 			if (_feedbackSettingsRequiredForScene)
 			{
-				FeedbackSettings = new FeedbackSettings();
-				loaderAndSavers.Add(new SavableDataLoaderSaver<FeedbackSettings>(serializedDataHolder, FeedbackSettings));
+				_feedbackSettings = new FeedbackSettings();
+				loaderAndSavers.Add(new SavableDataLoaderSaver<FeedbackSettings>(serializedDataHolder, _feedbackSettings));
 			}
 
 			if (_completeLevelInfoRequiredForScene)
 			{
-				CompletedLevelInfo = new CompletedLevelInfo();
-				loaderAndSavers.Add(new SavableDataLoaderSaver<CompletedLevelInfo>(serializedDataHolder, CompletedLevelInfo));
+				_completedLevelInfo = new CompletedLevelInfo();
+				loaderAndSavers.Add(new SavableDataLoaderSaver<CompletedLevelInfo>(serializedDataHolder, _completedLevelInfo));
 			}
 			
 			if (_localAppRequiredForScene)
 			{
-				LocalApp = new LocalApp();
-				loaderAndSavers.Add(new SavableDataLoaderSaver<LocalApp>(serializedDataHolder, LocalApp));
+				_localApp = new LocalApp();
+				loaderAndSavers.Add(new SavableDataLoaderSaver<LocalApp>(serializedDataHolder, _localApp));
 			}
 
 			SaveLoadManager = new SaveLoadManager(serializedDataHolder, loaderAndSavers);

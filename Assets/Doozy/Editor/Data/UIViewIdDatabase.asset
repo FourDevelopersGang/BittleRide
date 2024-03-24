@@ -31,6 +31,8 @@ MonoBehaviour:
     - Category: MainMenu
       Name: MainMenu
     - Category: MainMenu
+      Name: SelectBall
+    - Category: MainMenu
       Name: SelectLevel
     - Category: MainMenu
       Name: Settings

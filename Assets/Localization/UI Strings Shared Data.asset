@@ -83,6 +83,10 @@ MonoBehaviour:
     m_Key: defeat
     m_Metadata:
       m_Items: []
+  - m_Id: 594266530992128
+    m_Key: choose_ball
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
