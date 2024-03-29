@@ -4,29 +4,42 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace _src.Scripts
 {
 	public class LevelProgress : MonoBehaviour
 	{
 		[SerializeField, SceneObjectsOnly]
 		private SceneSavableDataProvider _sceneSavableDataProvider;
-		
+
+
 		[SerializeField]
 		private Slider _progressFill;
+
 
 		[SerializeField, Required]
 		private PlayerBugSmasher _playerBugSmasher;
 
+
 		[SerializeField, Required]
 		private PlayerProgression _playerProgression;
 
+
 		private float _currentProgress;
+
+
 		[SerializeField, ReadOnly]
 		private int _currentLevel = 1;
+
+
+		[SerializeField]
+		private int _levelForWin = 1;
+
 
 		private void Start()
 		{
 			_playerBugSmasher.OnIncreaseSize.AddListener(IncrementProgress);
+			_playerProgression.OnLevelUp.AddListener(CheckLevelCompleteConditionals);
 			_currentProgress = 0f;
 		}
 
@@ -37,36 +50,38 @@ namespace _src.Scripts
 			_progressFill.value = CalculateFillAmount();
 		}
 
+
 		private void IncrementProgress()
 		{
 			_currentProgress++;
-			// Обновление уровня, если текущий уровень в _playerProgression изменился
-			if (_playerProgression.CurrentLevel != _currentLevel)
-			{
-				// Обновление текущего уровня и сброс прогресса
-				_currentLevel = _playerProgression.CurrentLevel;
-				OnCompleteLevel(); // todo move to level complete when will be ready
-				_currentProgress = 1; // Поскольку событие увеличения уже произошло, начинаем отсчет с 1
-			}
+			UpdateLevelAndProgress(); // Обновляем уровень и прогресс
+		}
+
+
+		private void UpdateLevelAndProgress()
+		{
 			_progressFill.value = CalculateFillAmount();
 		}
 
+
 		private float CalculateFillAmount()
 		{
-			// Определяем количество жуков, необходимых для следующего уровня
-			int bugsRequiredForCurrentLevel = _playerProgression.LevelUpRequirements.ContainsKey(_currentLevel + 1) ?
-				_playerProgression.LevelUpRequirements[_currentLevel + 1] : 
-				0; // Если ключа нет, используем 0 для безопасности
+			int bugsRequiredForCurrentLevel = _playerProgression.LevelUpRequirements.ContainsKey(_currentLevel + 1) ? _playerProgression.LevelUpRequirements[_currentLevel + 1] : 0;
 
-			float progressFraction = bugsRequiredForCurrentLevel > 0 ? 
-				(float)(_currentProgress - 1) / (bugsRequiredForCurrentLevel - 1) : 
-				0; // Вычитаем 1, так как счет начинается с 1
+			// Изменение логики расчета прогресса в соответствии с текущим и следующим уровнем
+			float progressFraction = bugsRequiredForCurrentLevel > 0 ? (float)_currentProgress / bugsRequiredForCurrentLevel : 0;
 
-			// Рассчитываем положение на слайдере в зависимости от текущего уровня и прогресса
-			float baseValue = _currentLevel * 0.25f;
-			float scaledProgress = baseValue + (progressFraction * 0.25f); // Добавляем долю прогресса к базовому значению
+			// Учитываем количество флагов на слайдере в зависимости от уровня
+			float numberOfFlags = _currentLevel + 1; // Количество флагов равно номеру текущего уровня + 1
+			float sliderStep = 1f / numberOfFlags; // Шаг слайдера между флагами
 
-			return Mathf.Clamp(scaledProgress, 0, 1); // Ограничиваем значение между 0 и 1 для безопасности
+			// Рассчитываем значение для слайдера
+			float scaledProgress = sliderStep * _currentLevel + (progressFraction * sliderStep);
+
+			return Mathf.Clamp(scaledProgress,
+				0,
+				1
+			);
 		}
 
 
@@ -74,8 +89,20 @@ namespace _src.Scripts
 		{
 			LeaderboardProvider.Instance.TrySetNewHighScore(BallController.Instance.GetTotalScore());
 			_sceneSavableDataProvider.CompletedLevelInfo.AddCompletedLevel(_currentLevel); // todo change _currenLevel on level id
-			_sceneSavableDataProvider.SaveLoadManager.SaveData();	
-			_sceneSavableDataProvider.SaveLoadManager.SubmitChanges();	
+			_sceneSavableDataProvider.SaveLoadManager.SaveData();
+			_sceneSavableDataProvider.SaveLoadManager.SubmitChanges();
+		}
+
+
+		private void CheckLevelCompleteConditionals(int currentPlayerLeve)
+		{
+			if (currentPlayerLeve == _levelForWin)
+			{
+				_currentLevel = _playerProgression.CurrentLevel;
+				OnCompleteLevel(); // Обработка завершения уровня
+				_currentProgress = 1; // Начало отсчета с 1 для следующего уровня
+				_playerBugSmasher.WinSignal.SendSignal();
+			}
 		}
 
 

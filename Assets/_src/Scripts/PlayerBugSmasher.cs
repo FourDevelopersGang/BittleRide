@@ -54,11 +54,17 @@ namespace _src.Scripts
 		private List<Bug> _smashedBugs = new();
 
 
+		public int BugsSmashed => _smashedBugs.Count;
+
+
 		private Rigidbody _rb;
 
 
 		[SerializeField, Required, ChildGameObjectsOnly]
 		private SignalSender _defeatSignal;
+		
+		[SerializeField, Required, ChildGameObjectsOnly]
+		public SignalSender WinSignal;
 
 
 		[SerializeField, Required]

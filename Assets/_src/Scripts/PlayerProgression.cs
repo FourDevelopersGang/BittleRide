@@ -4,6 +4,7 @@ using _src.Scripts;
 using MoreMountains.Tools;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class PlayerProgression : MonoBehaviour
@@ -36,6 +37,9 @@ public class PlayerProgression : MonoBehaviour
 	public UnityDictionary<int, int> LevelUpRequirements => levelUpRequirements;
 
 
+	public UnityEvent<int> OnLevelUp = new();
+
+
 	private void Start()
 	{
 		if (_playerBugSmasher != null)
@@ -66,7 +70,7 @@ public class PlayerProgression : MonoBehaviour
 
 
 			bugsToLevelUp = levelUpRequirements[currentLevel + 1]; // Устанавливаем новый порог жуков для следующего уровня
-
+			OnLevelUp.Invoke(currentLevel);
 			Debug.Log($"Player level increased to {currentLevel}. Next level requires {levelUpRequirements[currentLevel + 1]} bugs.");
 		}
 	}
