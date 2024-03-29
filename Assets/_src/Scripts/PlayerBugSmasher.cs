@@ -104,35 +104,6 @@ namespace _src.Scripts
 			_playerReferences = GetComponent<PlayerReferences>();
 		}
 
-
-		private void OnCollisionEnter(Collision other)
-		{
-			if (_invisible)
-				return;
-
-			if (other.gameObject.CompareTag("Bug") && other.transform.TryGetComponent(out Bug bug))
-			{
-				if (bug.Level == _playerProgression.CurrentLevel)
-				{
-					InsertBug(bug);
-					IncreaseSize();
-					OnIncreaseSize.Invoke();
-				}
-				else if (bug.Level < _playerProgression.CurrentLevel)
-				{
-					InsertBug(bug);
-					IncreaseSize();
-				}
-				else if (bug.Level > _playerProgression.CurrentLevel)
-				{
-					_defeatSignal.SendSignal();
-					LeaderboardProvider.Instance.TrySetNewHighScore(GetTotalScore());
-					Destroy(other.gameObject);
-				}
-			}
-		}
-
-
 		private void OnTriggerEnter(Collider other)
 		{
 			if (_invisible)
