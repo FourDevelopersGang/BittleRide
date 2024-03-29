@@ -68,15 +68,13 @@ public class PlayerProgression : MonoBehaviour
 
 	private void UpdateSliderUI()
 	{
-		Debug.Log(bugsToLevelUp);
-		Debug.Log(bugsSmashed);
 		_playerProgressionUI.UpdateSliderValue(bugsSmashed / bugsToLevelUp);
 	}
 
 
 	private void CheckLevelProgression()
 	{
-		if (bugsSmashed >= bugsToLevelUp && levelUpRequirements.TryGetValue(currentLevel,
+		if (bugsSmashed >= bugsToLevelUp && levelUpRequirements.TryGetValue(currentLevel + 1,
 			    out int nextLevelRequirement
 		    ))
 		{

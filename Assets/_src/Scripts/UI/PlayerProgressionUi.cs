@@ -1,4 +1,5 @@
-﻿using MoreMountains.Feedbacks;
+﻿using System;
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +19,14 @@ namespace _src.Scripts.UI
 
 		[SerializeField]
 		private Slider _slider;
-		
+
+
+		private void Start()
+		{
+			_currentLevel.text = "0";
+		}
+
+
 		public void UpdateSliderValue(float value)
 		{
 			_slider.value = value;
