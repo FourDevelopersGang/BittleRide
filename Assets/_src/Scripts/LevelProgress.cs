@@ -28,6 +28,12 @@ namespace _src.Scripts
 		{
 			_playerBugSmasher.OnIncreaseSize.AddListener(IncrementProgress);
 			_currentProgress = 0f;
+		}
+
+
+		public void SetupSlider(Slider slider)
+		{
+			_progressFill = slider;
 			_progressFill.value = CalculateFillAmount();
 		}
 
