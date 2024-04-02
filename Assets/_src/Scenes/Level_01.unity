@@ -23667,6 +23667,68 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 951793324}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &952097617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 952097618}
+  - component: {fileID: 952097619}
+  m_Layer: 0
+  m_Name: RestartGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &952097618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952097617}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2093949208}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &952097619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952097617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c5a460cd354c7594ff84fcf2b3ff1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onCompleteWatchAd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8859372742930713903}
+        m_TargetAssemblyTypeName: Doozy.Runtime.Signals.SignalSender, Assembly-CSharp
+        m_MethodName: SendSignal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onLoadRewardAd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &952147927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53495,6 +53557,55 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &2093949207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2093949208}
+  - component: {fileID: 2093949209}
+  m_Layer: 0
+  m_Name: AdsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2093949208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093949207}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.1545379, y: -0.0005206205, z: 0.44213015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 952097618}
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2093949209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093949207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7fc53da326c45ee95bfa100e050227c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loadInterstitialOnEnable: 1
+  _loadRewardedOnEnable: 1
+  _loadNextInterstitialAfterClose: 1
+  _loadNextRewardAfterClose: 1
 --- !u!1001 &2097532768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55116,6 +55227,91 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8859372743254233177, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: OnVisibleCallback.Event.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743254233177, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: OnVisibleCallback.Event.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743254233177, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: OnVisibleCallback.Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2093949209}
+    - target: {fileID: 8859372743254233177, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: OnVisibleCallback.Event.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743254233177, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: OnVisibleCallback.Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RequestInterstitial
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743254233177, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: OnVisibleCallback.Event.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: _src.Scripts.Ads.AdsManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743254233177, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: OnVisibleCallback.Event.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743380245335, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: Behaviours.Behaviours.Array.data[0].Event.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743380245335, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: Behaviours.Behaviours.Array.data[0].Event.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743380245335, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: Behaviours.Behaviours.Array.data[0].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2093949207}
+    - target: {fileID: 8859372743380245335, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: Behaviours.Behaviours.Array.data[0].Event.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 8859372742930713901}
+    - target: {fileID: 8859372743380245335, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: Behaviours.Behaviours.Array.data[0].Event.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743380245335, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: Behaviours.Behaviours.Array.data[0].Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743380245335, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: Behaviours.Behaviours.Array.data[0].Event.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: RestartScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743380245335, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: Behaviours.Behaviours.Array.data[0].Event.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MoreMountains.Tools.MMSceneRestarter, MoreMountains.Tools
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743380245335, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: Behaviours.Behaviours.Array.data[0].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859372743380245335, guid: f3e5bddf46234a6469618feab39c2b60,
+        type: 3}
+      propertyPath: Behaviours.Behaviours.Array.data[0].Event.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8859372743832314753, guid: f3e5bddf46234a6469618feab39c2b60,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -55385,3 +55581,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d083d2a381d34eab987288a7ba44a829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8859372742930713901 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8859372744568113547, guid: f3e5bddf46234a6469618feab39c2b60,
+    type: 3}
+  m_PrefabInstance: {fileID: 8859372742930713899}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0988d9b4b34ac9c49a36cf9a04cf5776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &8859372742930713902 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8859372743641615396, guid: f3e5bddf46234a6469618feab39c2b60,
+    type: 3}
+  m_PrefabInstance: {fileID: 8859372742930713899}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8859372742930713903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859372742930713902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f003aa0ad0a4c469338c205df004d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Payload:
+    StreamId:
+      Category: InGameSignals
+      Name: RestorePlayer
+      Custom: 0
+    SignalValueType: 0
+    IntegerValue: 0
+    BooleanValue: 0
+    FloatValue: 0
+    StringValue: 
+    ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Vector2Value: {x: 0, y: 0}
+    Vector3Value: {x: 0, y: 0, z: 0}
+    Vector4Value: {x: 0, y: 0, z: 0, w: 0}
+  SendOnStart: 0
+  SendOnEnable: 0
+  SendOnDisable: 0
+  SendOnDestroy: 0

@@ -21,6 +21,8 @@ MonoBehaviour:
     - Category: InGameSignals
       Name: Loose
     - Category: InGameSignals
+      Name: RestorePlayer
+    - Category: InGameSignals
       Name: StartBoosterTimer
     - Category: InGameSignals
       Name: StartGameEvent

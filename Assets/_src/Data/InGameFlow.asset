@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8783205133252900754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ca1322e9e567644b0729e88c858878, type: 3}
+  m_Name: Time Scale
+  m_EditorClassIdentifier: 
+  FlowGraphId: d26f0fe3-acd9-404c-b06a-08766bc065a1
+  NodeId: 00767403-0818-479d-ba01-bb0d1fa1252e
+  NodeType: 0
+  NodeName: Time Scale
+  NodeDescription: 
+  InputPorts:
+  - NodeId: 00767403-0818-479d-ba01-bb0d1fa1252e
+    PortId: 3bd6e2ef-c1a9-4b2b-885e-e2fe59106ad8
+    Direction: 0
+    Capacity: 1
+    Connections:
+    - 9da40a8a-d4a7-457c-b961-601a958bca56
+    Value: 
+    ValueTypeQualifiedName: 
+    CanBeDeleted: 0
+    CanBeReordered: 0
+  OutputPorts:
+  - NodeId: 00767403-0818-479d-ba01-bb0d1fa1252e
+    PortId: f8b73dc6-f25c-46a3-91d8-0a84460eef3d
+    Direction: 1
+    Capacity: 0
+    Connections:
+    - cc5be36b-6422-4d58-9472-fe14b8b12c18
+    Value: 
+    ValueTypeQualifiedName: 
+    CanBeDeleted: 0
+    CanBeReordered: 0
+  RunUpdate: 0
+  RunFixedUpdate: 0
+  RunLateUpdate: 0
+  NodeState: 0
+  CanBeDeleted: 1
+  Passthrough: 1
+  ClearGraphHistory: 0
+  Position: {x: 897.05524, y: 73.60004}
+  TargetValue: 1
+  AnimateValue: 0
+  AnimationDuration: 1
+  AnimationEase: 0
+  WaitForAnimationToFinish: 0
 --- !u!114 &-8583431562971454790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +143,7 @@ MonoBehaviour:
     - cd81f41a-85a2-48bc-8cf9-eff6cb131d32
     - 041304c1-9fb0-49ef-993c-27f7e5129c71
     - 98ae3b11-dbed-4e4a-b774-ddb4d65f4584
+    - f8b73dc6-f25c-46a3-91d8-0a84460eef3d
     Value: '{"CanGoBack":false}'
     ValueTypeQualifiedName: Doozy.Runtime.UIManager.Nodes.PortData.GoBackInputPortData,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -137,7 +190,7 @@ MonoBehaviour:
   CanBeDeleted: 1
   Passthrough: 0
   ClearGraphHistory: 0
-  Position: {x: 142.99995, y: -344.00003}
+  Position: {x: 437.00394, y: -383.84964}
   OnEnterShowViews:
   - Id:
       Category: InGame
@@ -284,7 +337,7 @@ MonoBehaviour:
   CanBeDeleted: 1
   Passthrough: 0
   ClearGraphHistory: 0
-  Position: {x: 474.39996, y: -152.00002}
+  Position: {x: 747.84564, y: -189.60002}
   OnEnterShowViews:
   - Id:
       Category: InGame
@@ -413,7 +466,7 @@ MonoBehaviour:
   CanBeDeleted: 1
   Passthrough: 1
   ClearGraphHistory: 0
-  Position: {x: 242, y: 39.5}
+  Position: {x: 652.68024, y: 303.32483}
   TargetValue: 0
   AnimateValue: 0
   AnimationDuration: 1
@@ -504,7 +557,7 @@ MonoBehaviour:
   CanBeDeleted: 1
   Passthrough: 1
   ClearGraphHistory: 0
-  Position: {x: 1046.64, y: 11}
+  Position: {x: 1347.2988, y: 24.400106}
   GetSceneBy: 0
   LoadSceneMode: 0
   AllowSceneActivation: 1
@@ -566,7 +619,7 @@ MonoBehaviour:
   CanBeDeleted: 1
   Passthrough: 0
   ClearGraphHistory: 0
-  Position: {x: 810.222, y: -203.59996}
+  Position: {x: 1111.299, y: -189.9999}
   OnEnterShowViews:
   - Id:
       Category: InGame
@@ -660,8 +713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02761efe598a45c98fa1baf4d446c6a7, type: 3}
   m_Name: InGameFlow
   m_EditorClassIdentifier: 
-  EditorPosition: {x: -337.6, y: 380, z: 0}
-  EditorScale: {x: 1, y: 1, z: 1}
+  EditorPosition: {x: -380.8, y: 293.6, z: 0}
+  EditorScale: {x: 0.8695652, y: 0.8695652, z: 1}
   Id: d26f0fe3-acd9-404c-b06a-08766bc065a1
   GraphName: Flow Graph
   GraphDescription: 
@@ -701,6 +754,7 @@ MonoBehaviour:
   - {fileID: -5754730883133318303}
   - {fileID: -450130425142394036}
   - {fileID: -2876480294571562980}
+  - {fileID: -8783205133252900754}
   RootNode: {fileID: -3248165160009347740}
   ActiveNode: {fileID: 0}
 --- !u!114 &2856232409369560224
@@ -772,7 +826,7 @@ MonoBehaviour:
   CanBeDeleted: 1
   Passthrough: 0
   ClearGraphHistory: 0
-  Position: {x: 603, y: 185}
+  Position: {x: 1151.6592, y: 427.2}
   OnEnterShowViews:
   - Id:
       Category: InGame
@@ -846,6 +900,17 @@ MonoBehaviour:
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     CanBeDeleted: 1
     CanBeReordered: 1
+  - NodeId: 12f479ac-84de-4d97-b045-ebaeede006d2
+    PortId: 9da40a8a-d4a7-457c-b961-601a958bca56
+    Direction: 1
+    Capacity: 0
+    Connections:
+    - 3bd6e2ef-c1a9-4b2b-885e-e2fe59106ad8
+    Value: '{"Trigger":1,"TimeDelay":3.0,"SignalPayload":{"StreamId":{"Category":"InGameSignals","Name":"RestorePlayer","Custom":false},"SignalValueType":0,"IntegerValue":0,"BooleanValue":false,"FloatValue":0.0,"StringValue":"","ColorValue":{"r":0.0,"g":0.0,"b":0.0,"a":0.0},"Vector2Value":{"x":0.0,"y":0.0},"Vector3Value":{"x":0.0,"y":0.0,"z":0.0},"Vector4Value":{"x":0.0,"y":0.0,"z":0.0,"w":0.0}},"ButtonId":{"Category":"None","Name":"None","Custom":false},"ToggleId":{"Category":"None","Name":"None","Custom":false},"CommandToggle":2,"ViewId":{"Category":"None","Name":"None","Custom":false},"CommandShowHide":0}'
+    ValueTypeQualifiedName: Doozy.Runtime.UIManager.Nodes.PortData.UIOutputPortData,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    CanBeDeleted: 1
+    CanBeReordered: 1
   RunUpdate: 0
   RunFixedUpdate: 0
   RunLateUpdate: 0
@@ -853,7 +918,7 @@ MonoBehaviour:
   CanBeDeleted: 1
   Passthrough: 0
   ClearGraphHistory: 0
-  Position: {x: 474, y: 27.5}
+  Position: {x: 526.4, y: -38.400013}
   OnEnterShowViews:
   - Id:
       Category: InGame
@@ -916,7 +981,7 @@ MonoBehaviour:
   CanBeDeleted: 1
   Passthrough: 1
   ClearGraphHistory: 0
-  Position: {x: 242, y: -79}
+  Position: {x: 652.68024, y: 184.9248}
   TargetValue: 0
   AnimateValue: 0
   AnimationDuration: 1
@@ -1021,7 +1086,7 @@ MonoBehaviour:
   CanBeDeleted: 1
   Passthrough: 1
   ClearGraphHistory: 0
-  Position: {x: 279, y: 235.63998}
+  Position: {x: 689.4802, y: 499.32483}
   TargetValue: 0
   AnimateValue: 0
   AnimationDuration: 1
