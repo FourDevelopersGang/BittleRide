@@ -1,32 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using _src.Scripts;
+using _src.Scripts.UI;
 using MoreMountains.Tools;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class PlayerProgression : MonoBehaviour
 {
-	[SerializeField , Required]
+	[SerializeField, Required]
 	private PlayerBugSmasher _playerBugSmasher; // Ссылка на скрипт PlayerIncrease
 
 
 	[SerializeField, ReadOnly]
-	private int bugsSmashed = 0; // Количество уничтоженных жуков
+	private float bugsSmashed = 0; // Количество уничтоженных жуков
 
 
-	private int bugsToLevelUp = 100; // Необходимое количество жуков для повышения уровня
+	private float bugsToLevelUp = 100; // Необходимое количество жуков для повышения уровня
 
 
 	[SerializeField, ReadOnly]
 	private int currentLevel = 0; // Текущий уровень игрока
 
 
+	[SerializeField, SceneObjectsOnly, Required]
+	private PlayerProgressionUi _playerProgressionUI;
+
+
 	public int CurrentLevel => currentLevel;
 
 
-	public int BugsToLevelUp => bugsToLevelUp;
+	public float BugsToLevelUp => bugsToLevelUp;
 
 
 	[SerializeField]
@@ -34,6 +41,9 @@ public class PlayerProgression : MonoBehaviour
 
 
 	public UnityDictionary<int, int> LevelUpRequirements => levelUpRequirements;
+
+
+	public UnityEvent<int> OnLevelUp = new();
 
 
 	private void Start()
@@ -44,14 +54,21 @@ public class PlayerProgression : MonoBehaviour
 			_playerBugSmasher.OnIncreaseSize.AddListener(HandleIncreaseSize);
 		}
 
-		bugsToLevelUp = levelUpRequirements[1];
+		bugsToLevelUp = levelUpRequirements.FirstOrDefault().Value;
 	}
 
 
 	private void HandleIncreaseSize()
 	{
 		bugsSmashed++; // Увеличиваем счётчик уничтоженных жуков
+		UpdateSliderUI();
 		CheckLevelProgression(); // Проверяем, достигнут ли порог для повышения уровня
+	}
+
+
+	private void UpdateSliderUI()
+	{
+		_playerProgressionUI.UpdateSliderValue(bugsSmashed / bugsToLevelUp);
 	}
 
 
@@ -61,14 +78,20 @@ public class PlayerProgression : MonoBehaviour
 			    out int nextLevelRequirement
 		    ))
 		{
-			bugsSmashed = 0; // Сбрасываем счётчик жуков
-			currentLevel++; // Повышаем уровень
-
-
-			bugsToLevelUp = levelUpRequirements[currentLevel + 1]; // Устанавливаем новый порог жуков для следующего уровня
-
-			Debug.Log($"Player level increased to {currentLevel}. Next level requires {levelUpRequirements[currentLevel + 1]} bugs.");
+			LevelUp();
+			_playerProgressionUI.LevelUp(currentLevel);
 		}
+	}
+
+
+	private void LevelUp()
+	{
+		bugsSmashed = 0; // Сбрасываем счётчик жуков
+		currentLevel += 1; // Повышаем уровень
+		_playerProgressionUI.LevelUp(currentLevel);
+		bugsToLevelUp = levelUpRequirements[currentLevel]; // Устанавливаем новый порог жуков для следующего уровня
+		OnLevelUp.Invoke(currentLevel);
+		Debug.Log($"Player level increased to {currentLevel}. Next level requires {levelUpRequirements[currentLevel]} bugs.");
 	}
 
 

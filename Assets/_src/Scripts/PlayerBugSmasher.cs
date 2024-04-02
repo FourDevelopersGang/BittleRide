@@ -54,11 +54,17 @@ namespace _src.Scripts
 		private List<Bug> _smashedBugs = new();
 
 
+		public int BugsSmashed => _smashedBugs.Count;
+
+
 		private Rigidbody _rb;
 
 
 		[SerializeField, Required, ChildGameObjectsOnly]
 		private SignalSender _defeatSignal;
+		
+		[SerializeField, Required, ChildGameObjectsOnly]
+		public SignalSender WinSignal;
 
 
 		[SerializeField, Required]
@@ -97,35 +103,6 @@ namespace _src.Scripts
 			_rb = GetComponent<Rigidbody>();
 			_playerReferences = GetComponent<PlayerReferences>();
 		}
-
-
-		private void OnCollisionEnter(Collision other)
-		{
-			if (_invisible)
-				return;
-
-			if (other.gameObject.CompareTag("Bug") && other.transform.TryGetComponent(out Bug bug))
-			{
-				if (bug.Level == _playerProgression.CurrentLevel)
-				{
-					InsertBug(bug);
-					IncreaseSize();
-					OnIncreaseSize.Invoke();
-				}
-				else if (bug.Level < _playerProgression.CurrentLevel)
-				{
-					InsertBug(bug);
-					IncreaseSize();
-				}
-				else if (bug.Level > _playerProgression.CurrentLevel)
-				{
-					_defeatSignal.SendSignal();
-					LeaderboardProvider.Instance.TrySetNewHighScore(GetTotalScore());
-					Destroy(other.gameObject);
-				}
-			}
-		}
-
 
 		private void OnTriggerEnter(Collider other)
 		{
