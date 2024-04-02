@@ -15150,7 +15150,6 @@ GameObject:
   - component: {fileID: 2638571429018307637}
   - component: {fileID: 903655890028204027}
   - component: {fileID: 9085638069949922381}
-  - component: {fileID: 4100498004451791270}
   - component: {fileID: 726809436578787256}
   - component: {fileID: 8629677156942980819}
   - component: {fileID: 6107747729029634641}
@@ -15220,18 +15219,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4100498004451791270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1374302275569055797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c44aaacc9ec444a884be1bb4e3e14356, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &726809436578787256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15304,19 +15291,7 @@ MonoBehaviour:
       Runners: []
       Event:
         m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 4100498004451791270}
-            m_TargetAssemblyTypeName: Doozy.Runtime.UIManager.Input.BackButton, Assembly-CSharp
-            m_MethodName: Fire
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
+          m_Calls: []
   SelectedState:
     StateType: 3
     StateEvent:
@@ -15340,8 +15315,8 @@ MonoBehaviour:
   Cooldown: 0
   DisableWhenInCooldown: 0
   Id:
-    Category: None
-    Name: None
+    Category: InGame
+    Name: Continue
     Custom: 0
 --- !u!225 &8629677156942980819
 CanvasGroup:
@@ -19656,6 +19631,7 @@ MonoBehaviour:
   _entryViewPrefabPrefab: {fileID: 578113222621675282, guid: 377452a67d8a316448867c5eda429fd6,
     type: 3}
   _scrollRect: {fileID: 5491001967791681177}
+  _backButton: {fileID: 726809436578787256}
 --- !u!1 &4509664502394008592
 GameObject:
   m_ObjectHideFlags: 0

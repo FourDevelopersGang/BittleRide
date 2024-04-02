@@ -1,7 +1,11 @@
 using System.Collections.Generic;
 using System.Threading;
 using _src.Scripts.SocialPlatform.Leaderboards;
+using _src.Scripts.Utils;
+using Doozy.Runtime.Signals;
+using Doozy.Runtime.UIManager.Components;
 using Doozy.Runtime.UIManager.Containers;
+using Doozy.Runtime.UIManager.Input;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +18,7 @@ namespace _src.Scripts.UI.Leaderboard
         [SerializeField] private TextMeshProUGUI _statusText;
         [SerializeField] private LeaderboardEntryView _entryViewPrefabPrefab;
         [SerializeField] private ScrollRect _scrollRect;
+        [SerializeField] private UIButton _backButton;
 
         private List<LeaderboardEntryView> _entryViews;
         private ILeaderboardService _leaderboardService;
@@ -29,6 +34,7 @@ namespace _src.Scripts.UI.Leaderboard
             _uiView.Hide();
             _uiView.OnShowCallback.Event.AddListener(OnShown);
             _uiView.OnHiddenCallback.Event.AddListener(OnHidden);
+            _backButton.onClickEvent.AddListener(DoozyUtils.SendBackButtonSignal);
         }
 
         private void OnDestroy()
@@ -38,8 +44,10 @@ namespace _src.Scripts.UI.Leaderboard
                 _uiView.OnShowCallback.Event.RemoveListener(OnShown);
                 _uiView.OnHiddenCallback.Event.RemoveListener(OnHidden);
             }
+
+            _backButton.onClickEvent.RemoveListener(DoozyUtils.SendBackButtonSignal);
         }
-        
+
         private void OnShown()
         {
             SetAllEntryViewActive(false);
